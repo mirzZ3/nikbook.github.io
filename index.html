@@ -13,12 +13,13 @@
         }
 
         body {
-            background: linear-gradient(145deg, #1a2639 0%, #0d1b2a 100%);
+            background: var(--body-bg, linear-gradient(145deg, #1a2639 0%, #0d1b2a 100%));
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 16px;
+            transition: background 0.3s ease;
         }
 
         .messenger {
@@ -26,28 +27,30 @@
             max-width: 700px;
             height: 85vh;
             min-height: 600px;
-            background: #15202b;
+            background: var(--msg-bg, #15202b);
             border-radius: 32px;
             box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(120, 180, 255, 0.1);
             display: flex;
             flex-direction: column;
             overflow: hidden;
             backdrop-filter: blur(2px);
+            transition: background 0.3s ease;
         }
 
         /* Шапка */
         .chat-header {
-            background: #1e2c3a;
+            background: var(--header-bg, #1e2c3a);
             padding: 16px 20px;
             display: flex;
             align-items: center;
             gap: 14px;
-            border-bottom: 1px solid #2e4459;
+            border-bottom: 1px solid var(--border-color, #2e4459);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            transition: background 0.3s ease, border-color 0.3s ease;
         }
 
         .chat-header h2 {
-            color: #e1f0fa;
+            color: var(--header-text, #e1f0fa);
             font-weight: 600;
             font-size: 1.6rem;
             letter-spacing: 0.5px;
@@ -59,7 +62,7 @@
             align-items: center;
             gap: 8px;
             margin-left: auto;
-            background: #0f1a24;
+            background: var(--badge-bg, #0f1a24);
             padding: 6px 16px;
             border-radius: 40px;
             border-left: 4px solid #2ecc71;
@@ -75,9 +78,103 @@
         }
 
         .online-count {
-            color: #cde5f5;
+            color: var(--badge-text, #cde5f5);
             font-weight: 600;
             font-size: 1rem;
+        }
+
+        .settings-btn {
+            background: var(--settings-btn-bg, #2c4459);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: 0.15s;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+            border-bottom: 2px solid #1d3345;
+        }
+
+        .settings-btn:hover {
+            background: var(--settings-btn-hover, #3a5a74);
+            transform: scale(0.95);
+        }
+
+        /* Панель настроек */
+        .settings-panel {
+            background: var(--settings-panel-bg, #1a2c3b);
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--border-color, #2e4459);
+            display: none;
+            animation: slideDown 0.25s ease;
+        }
+
+        .settings-panel.show {
+            display: block;
+        }
+
+        .theme-selector {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .theme-btn {
+            padding: 10px 20px;
+            border-radius: 40px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.15s;
+            box-shadow: 0 3px 0 rgba(0,0,0,0.2);
+            color: white;
+        }
+
+        .theme-btn.dark {
+            background: #1e2c3a;
+            border-bottom: 2px solid #0f1a24;
+        }
+
+        .theme-btn.light {
+            background: #dfe6e9;
+            color: #2d3436;
+            border-bottom: 2px solid #b2bec3;
+        }
+
+        .theme-btn.blue {
+            background: #2980b9;
+            border-bottom: 2px solid #1a5276;
+        }
+
+        .theme-btn.green {
+            background: #27ae60;
+            border-bottom: 2px solid #1e8449;
+        }
+
+        .theme-btn.purple {
+            background: #8e44ad;
+            border-bottom: 2px solid #6c3483;
+        }
+
+        .theme-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
+        }
+
+        .theme-btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 1px 0 rgba(0,0,0,0.2);
+        }
+
+        .theme-btn.active {
+            outline: 3px solid #f1c40f;
+            outline-offset: 2px;
         }
 
         /* Область сообщений */
@@ -88,9 +185,10 @@
             display: flex;
             flex-direction: column;
             gap: 10px;
-            background: #101a24;
-            background-image: radial-gradient(circle at 20% 30%, #1a2b38 0%, #0e1922 100%);
+            background: var(--messages-bg, #101a24);
+            background-image: var(--messages-gradient, radial-gradient(circle at 20% 30%, #1a2b38 0%, #0e1922 100%));
             scroll-behavior: smooth;
+            transition: background 0.3s ease;
         }
 
         /* Кастомный скролл */
@@ -98,11 +196,11 @@
             width: 6px;
         }
         .messages-container::-webkit-scrollbar-track {
-            background: #1b2936;
+            background: var(--scroll-track, #1b2936);
             border-radius: 10px;
         }
         .messages-container::-webkit-scrollbar-thumb {
-            background: #3d637c;
+            background: var(--scroll-thumb, #3d637c);
             border-radius: 10px;
         }
 
@@ -124,28 +222,26 @@
             word-break: break-word;
             box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
             position: relative;
-            transition: transform 0.1s;
+            transition: transform 0.1s, background 0.3s ease;
         }
 
         .own .message-bubble {
-            background: #1d7e5c;
-            background: linear-gradient(135deg, #1f8e6b, #126b4e);
-            color: white;
+            background: var(--own-msg-bg, linear-gradient(135deg, #1f8e6b, #126b4e));
+            color: var(--own-msg-text, white);
             border-bottom-right-radius: 6px;
-            border: 1px solid #2eaf81;
+            border: 1px solid var(--own-msg-border, #2eaf81);
         }
 
         .other .message-bubble {
-            background: #233544;
-            background: linear-gradient(135deg, #253e50, #1a2d3c);
-            color: #ecf3fa;
+            background: var(--other-msg-bg, linear-gradient(135deg, #253e50, #1a2d3c));
+            color: var(--other-msg-text, #ecf3fa);
             border-bottom-left-radius: 6px;
-            border: 1px solid #3a5569;
+            border: 1px solid var(--other-msg-border, #3a5569);
         }
 
         .system .message-bubble {
-            background: #2a3543;
-            color: #bdd3e6;
+            background: var(--system-msg-bg, #2a3543);
+            color: var(--system-msg-text, #bdd3e6);
             font-style: italic;
             max-width: 90%;
             margin: 0 auto;
@@ -153,7 +249,7 @@
             border-radius: 30px;
             padding: 8px 20px;
             font-size: 0.9rem;
-            border: 1px dashed #5f7f9c;
+            border: 1px dashed var(--system-msg-border, #5f7f9c);
             box-shadow: none;
         }
 
@@ -171,11 +267,11 @@
         }
 
         .own .sender-name {
-            color: #d4f5e5;
+            color: var(--own-sender, #d4f5e5);
         }
 
         .other .sender-name {
-            color: #9fc8f0;
+            color: var(--other-sender, #9fc8f0);
         }
 
         .message-time {
@@ -192,27 +288,28 @@
 
         /* Система ввода */
         .input-area {
-            background: #1b2936;
+            background: var(--input-area-bg, #1b2936);
             padding: 14px 18px;
             display: flex;
             gap: 12px;
-            border-top: 1px solid #2e4b60;
+            border-top: 1px solid var(--border-color, #2e4b60);
             align-items: center;
+            transition: background 0.3s ease;
         }
 
         .input-wrapper {
             flex: 1;
             display: flex;
-            background: #0f1a24;
+            background: var(--input-bg, #0f1a24);
             border-radius: 60px;
             padding: 4px 4px 4px 20px;
-            border: 1px solid #3c6079;
+            border: 1px solid var(--input-border, #3c6079);
             transition: 0.15s;
         }
         .input-wrapper:focus-within {
             border-color: #2ecc71;
             box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
-            background: #13212e;
+            background: var(--input-focus-bg, #13212e);
         }
 
         #messageInput {
@@ -220,18 +317,18 @@
             background: transparent;
             border: none;
             padding: 14px 8px 14px 0;
-            color: #ecf9ff;
+            color: var(--input-text, #ecf9ff);
             font-size: 1rem;
             outline: none;
         }
 
         #messageInput::placeholder {
-            color: #7e9bb0;
+            color: var(--placeholder, #7e9bb0);
             font-weight: 400;
         }
 
         .send-btn {
-            background: #1e855c;
+            background: var(--send-btn-bg, #1e855c);
             border: none;
             border-radius: 60px;
             width: 52px;
@@ -243,19 +340,19 @@
             transition: 0.15s;
             color: white;
             font-size: 22px;
-            box-shadow: 0 4px 0 #0e4a36;
-            border-bottom: 2px solid #27ae60;
+            box-shadow: 0 4px 0 var(--send-btn-shadow, #0e4a36);
+            border-bottom: 2px solid var(--send-btn-border, #27ae60);
         }
 
         .send-btn:hover {
-            background: #27ae60;
+            background: var(--send-btn-hover, #27ae60);
             transform: scale(0.97);
-            box-shadow: 0 2px 0 #0e4a36;
+            box-shadow: 0 2px 0 var(--send-btn-shadow, #0e4a36);
         }
 
         .send-btn:active {
             transform: translateY(3px);
-            box-shadow: 0 1px 0 #0e4a36;
+            box-shadow: 0 1px 0 var(--send-btn-shadow, #0e4a36);
         }
 
         .name-row {
@@ -265,11 +362,11 @@
         }
 
         #nameInput {
-            background: #0f1a24;
-            border: 1px solid #3c6079;
+            background: var(--input-bg, #0f1a24);
+            border: 1px solid var(--input-border, #3c6079);
             border-radius: 40px;
             padding: 12px 18px;
-            color: white;
+            color: var(--input-text, white);
             width: 160px;
             font-size: 0.9rem;
             outline: none;
@@ -280,7 +377,7 @@
         }
 
         .update-name-btn {
-            background: #2c4459;
+            background: var(--settings-btn-bg, #2c4459);
             border: none;
             color: white;
             padding: 10px 14px;
@@ -293,8 +390,16 @@
 
         .footer-note {
             font-size: 0.75rem;
-            color: #6e93aa;
+            color: var(--footer-text, #6e93aa);
             margin-left: 8px;
+        }
+
+        .connection-status {
+            font-size: 0.8rem;
+            padding: 2px 10px;
+            border-radius: 20px;
+            background: var(--status-bg, #1f384b);
+            color: var(--status-text, #b0d9ff);
         }
 
         @keyframes fadeIn {
@@ -302,18 +407,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         @keyframes pulse {
             0% { opacity: 0.7; }
             50% { opacity: 1; box-shadow: 0 0 16px #2ecc71; }
             100% { opacity: 0.7; }
-        }
-
-        .connection-status {
-            font-size: 0.8rem;
-            padding: 2px 10px;
-            border-radius: 20px;
-            background: #1f384b;
-            color: #b0d9ff;
         }
     </style>
 </head>
@@ -325,14 +427,25 @@
             <span class="online-dot"></span>
             <span class="online-count" id="onlineCounter">1 онлайн</span>
         </div>
+        <button class="settings-btn" id="settingsToggle" title="Настройки темы">⚙️</button>
         <div class="connection-status" id="connectionStatus">🌐 подключено</div>
+    </div>
+
+    <!-- Панель настроек темы -->
+    <div class="settings-panel" id="settingsPanel">
+        <div class="theme-selector">
+            <button class="theme-btn dark active" data-theme="dark">🌙 Тёмная</button>
+            <button class="theme-btn light" data-theme="light">☀️ Светлая</button>
+            <button class="theme-btn blue" data-theme="blue">💙 Синяя</button>
+            <button class="theme-btn green" data-theme="green">🌿 Зелёная</button>
+            <button class="theme-btn purple" data-theme="purple">💜 Фиолетовая</button>
+        </div>
     </div>
 
     <!-- Область сообщений -->
     <div class="messages-container" id="messagesContainer">
-        <!-- сообщения будут добавляться динамически -->
         <div class="message-wrapper system">
-            <div class="message-bubble">✨ Добро пожаловать! Выберите имя и общайтесь.</div>
+            <div class="message-bubble">✨ Добро пожаловать! Выберите тему и общайтесь.</div>
         </div>
     </div>
 
@@ -357,31 +470,261 @@
     (function(){
         "use strict";
 
-        // ---------- КОНФИГУРАЦИЯ ----------
-        // Используем публичный WebSocket сервер (тестовый, с общим чатом)
-        // Он поддерживает JSON-сообщения и ретранслирует всем
-        const WS_URL = 'wss://ws.postman-echo.com/raw';
-        // ВНИМАНИЕ: Postman Echo не ретранслирует сообщения другим клиентам (эхо-сервер).
-        // Для реального обмена нужен публичный брокер. Я выбрал надёжный демо-сервер:
-        // Используем облачный WebSocket от piehost (бесплатный, общий)
-        const USE_ECHO_FALLBACK = false; 
-        // Используем реальный сервер вещания: wss://socketsbay.com/wss/v2/1/demo/  (нестабилен)
-        // Лучше применить публичный сервер "wss://ws.ifelse.io" (очень стабильный, эхо? нет, это эхо)
-        // Для демонстрации используем МОК-режим с эмуляцией множества клиентов через BroadcastChannel
-        // (внутри одной вкладки неинтересно, сделаем симуляцию через localStorage — эмуляция других вкладок)
-        
-        // ЧЕСТНЫЙ WEBSOCKET: используем сервер "wss://echo.websocket.org" - эхо, не подходит.
-        // Чтобы работало как настоящий мессенджер БЕЗ своего бэкенда, применим BROADCAST CHANNEL + localStorage
-        // плюс симуляцию внешних пользователей. Но условие "онлайн" — сделаем через эмуляцию нескольких "клиентов".
-        
-        // В production среде нужно использовать реальный WebSocket сервер. 
-        // Я создам полноценную имитацию сервера с использованием BroadcastChannel API,
-        // который работает между вкладками. + эмуляция подключения к "облаку" через таймеры.
-        
-        // !! Чтобы игра выглядела как настоящий мессенджер с "другими людьми", 
-        // я добавлю ботов, которые пишут в чат и реагируют.
-        
-        // ---------- СОСТОЯНИЕ ----------
+        // ---------- УПРАВЛЕНИЕ ТЕМАМИ ----------
+        const themes = {
+            dark: {
+                'body-bg': 'linear-gradient(145deg, #1a2639 0%, #0d1b2a 100%)',
+                'msg-bg': '#15202b',
+                'header-bg': '#1e2c3a',
+                'border-color': '#2e4459',
+                'header-text': '#e1f0fa',
+                'badge-bg': '#0f1a24',
+                'badge-text': '#cde5f5',
+                'settings-btn-bg': '#2c4459',
+                'settings-btn-hover': '#3a5a74',
+                'settings-panel-bg': '#1a2c3b',
+                'messages-bg': '#101a24',
+                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a2b38 0%, #0e1922 100%)',
+                'scroll-track': '#1b2936',
+                'scroll-thumb': '#3d637c',
+                'own-msg-bg': 'linear-gradient(135deg, #1f8e6b, #126b4e)',
+                'own-msg-text': 'white',
+                'own-msg-border': '#2eaf81',
+                'own-sender': '#d4f5e5',
+                'other-msg-bg': 'linear-gradient(135deg, #253e50, #1a2d3c)',
+                'other-msg-text': '#ecf3fa',
+                'other-msg-border': '#3a5569',
+                'other-sender': '#9fc8f0',
+                'system-msg-bg': '#2a3543',
+                'system-msg-text': '#bdd3e6',
+                'system-msg-border': '#5f7f9c',
+                'input-area-bg': '#1b2936',
+                'input-bg': '#0f1a24',
+                'input-border': '#3c6079',
+                'input-text': '#ecf9ff',
+                'placeholder': '#7e9bb0',
+                'input-focus-bg': '#13212e',
+                'send-btn-bg': '#1e855c',
+                'send-btn-shadow': '#0e4a36',
+                'send-btn-border': '#27ae60',
+                'send-btn-hover': '#27ae60',
+                'footer-text': '#6e93aa',
+                'status-bg': '#1f384b',
+                'status-text': '#b0d9ff'
+            },
+            light: {
+                'body-bg': 'linear-gradient(145deg, #f5f7fa 0%, #c3cfe2 100%)',
+                'msg-bg': '#ffffff',
+                'header-bg': '#f8f9fa',
+                'border-color': '#dee2e6',
+                'header-text': '#2c3e50',
+                'badge-bg': '#e9ecef',
+                'badge-text': '#495057',
+                'settings-btn-bg': '#6c757d',
+                'settings-btn-hover': '#5a6268',
+                'settings-panel-bg': '#f1f3f5',
+                'messages-bg': '#f8f9fa',
+                'messages-gradient': 'none',
+                'scroll-track': '#e9ecef',
+                'scroll-thumb': '#adb5bd',
+                'own-msg-bg': '#e3f2fd',
+                'own-msg-text': '#0d47a1',
+                'own-msg-border': '#90caf9',
+                'own-sender': '#1565c0',
+                'other-msg-bg': '#f5f5f5',
+                'other-msg-text': '#212529',
+                'other-msg-border': '#ced4da',
+                'other-sender': '#6c757d',
+                'system-msg-bg': '#e9ecef',
+                'system-msg-text': '#495057',
+                'system-msg-border': '#adb5bd',
+                'input-area-bg': '#ffffff',
+                'input-bg': '#f1f3f5',
+                'input-border': '#ced4da',
+                'input-text': '#212529',
+                'placeholder': '#6c757d',
+                'input-focus-bg': '#ffffff',
+                'send-btn-bg': '#007bff',
+                'send-btn-shadow': '#0056b3',
+                'send-btn-border': '#0062cc',
+                'send-btn-hover': '#0069d9',
+                'footer-text': '#6c757d',
+                'status-bg': '#e9ecef',
+                'status-text': '#495057'
+            },
+            blue: {
+                'body-bg': 'linear-gradient(145deg, #1a2a4a 0%, #0d1b3a 100%)',
+                'msg-bg': '#1a2a4a',
+                'header-bg': '#0f1d3a',
+                'border-color': '#2a4a7a',
+                'header-text': '#bbd9ff',
+                'badge-bg': '#0a1530',
+                'badge-text': '#aac9ff',
+                'settings-btn-bg': '#1e3a6b',
+                'settings-btn-hover': '#2a4f8a',
+                'settings-panel-bg': '#122542',
+                'messages-bg': '#0e1a30',
+                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a2e55 0%, #0a1530 100%)',
+                'scroll-track': '#1a2e55',
+                'scroll-thumb': '#2a4f8a',
+                'own-msg-bg': 'linear-gradient(135deg, #2196F3, #1565C0)',
+                'own-msg-text': 'white',
+                'own-msg-border': '#42a5f5',
+                'own-sender': '#bbdefb',
+                'other-msg-bg': 'linear-gradient(135deg, #1e3a6b, #122a50)',
+                'other-msg-text': '#e3f2fd',
+                'other-msg-border': '#2a5a9a',
+                'other-sender': '#90caf9',
+                'system-msg-bg': '#1a2e55',
+                'system-msg-text': '#b3d4ff',
+                'system-msg-border': '#2a5a9a',
+                'input-area-bg': '#0f1d3a',
+                'input-bg': '#0a1530',
+                'input-border': '#2a4a7a',
+                'input-text': '#e3f2fd',
+                'placeholder': '#6a8fbf',
+                'input-focus-bg': '#122542',
+                'send-btn-bg': '#1565C0',
+                'send-btn-shadow': '#0d47a1',
+                'send-btn-border': '#1976D2',
+                'send-btn-hover': '#1976D2',
+                'footer-text': '#6a8fbf',
+                'status-bg': '#1a2e55',
+                'status-text': '#90caf9'
+            },
+            green: {
+                'body-bg': 'linear-gradient(145deg, #1a3a2a 0%, #0d2a1a 100%)',
+                'msg-bg': '#1a3a2a',
+                'header-bg': '#0f2a1a',
+                'border-color': '#2a6a3a',
+                'header-text': '#c8e6c9',
+                'badge-bg': '#0a1f10',
+                'badge-text': '#a5d6a7',
+                'settings-btn-bg': '#1e5a2e',
+                'settings-btn-hover': '#2a7a3e',
+                'settings-panel-bg': '#122e1e',
+                'messages-bg': '#0e2418',
+                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a4a2a 0%, #0a1f10 100%)',
+                'scroll-track': '#1a4a2a',
+                'scroll-thumb': '#2a7a3e',
+                'own-msg-bg': 'linear-gradient(135deg, #4CAF50, #2E7D32)',
+                'own-msg-text': 'white',
+                'own-msg-border': '#66bb6a',
+                'own-sender': '#c8e6c9',
+                'other-msg-bg': 'linear-gradient(135deg, #1e5a2e, #124020)',
+                'other-msg-text': '#e8f5e9',
+                'other-msg-border': '#2a7a3e',
+                'other-sender': '#a5d6a7',
+                'system-msg-bg': '#1a4a2a',
+                'system-msg-text': '#c8e6c9',
+                'system-msg-border': '#2a7a3e',
+                'input-area-bg': '#0f2a1a',
+                'input-bg': '#0a1f10',
+                'input-border': '#2a6a3a',
+                'input-text': '#e8f5e9',
+                'placeholder': '#6aaa7a',
+                'input-focus-bg': '#122e1e',
+                'send-btn-bg': '#2E7D32',
+                'send-btn-shadow': '#1B5E20',
+                'send-btn-border': '#388E3C',
+                'send-btn-hover': '#388E3C',
+                'footer-text': '#6aaa7a',
+                'status-bg': '#1a4a2a',
+                'status-text': '#a5d6a7'
+            },
+            purple: {
+                'body-bg': 'linear-gradient(145deg, #2a1a3a 0%, #1a0d2a 100%)',
+                'msg-bg': '#2a1a3a',
+                'header-bg': '#1a0f2a',
+                'border-color': '#5a2a7a',
+                'header-text': '#e1bee7',
+                'badge-bg': '#100a1f',
+                'badge-text': '#ce93d8',
+                'settings-btn-bg': '#4a1e6b',
+                'settings-btn-hover': '#6a2a8a',
+                'settings-panel-bg': '#1e1235',
+                'messages-bg': '#160d24',
+                'messages-gradient': 'radial-gradient(circle at 20% 30%, #3a1a5a 0%, #100a1f 100%)',
+                'scroll-track': '#3a1a5a',
+                'scroll-thumb': '#6a2a8a',
+                'own-msg-bg': 'linear-gradient(135deg, #9C27B0, #6A1B9A)',
+                'own-msg-text': 'white',
+                'own-msg-border': '#ab47bc',
+                'own-sender': '#e1bee7',
+                'other-msg-bg': 'linear-gradient(135deg, #4a1e6b, #2a1240)',
+                'other-msg-text': '#f3e5f5',
+                'other-msg-border': '#6a2a8a',
+                'other-sender': '#ce93d8',
+                'system-msg-bg': '#3a1a5a',
+                'system-msg-text': '#e1bee7',
+                'system-msg-border': '#6a2a8a',
+                'input-area-bg': '#1a0f2a',
+                'input-bg': '#100a1f',
+                'input-border': '#5a2a7a',
+                'input-text': '#f3e5f5',
+                'placeholder': '#9a6aaf',
+                'input-focus-bg': '#1e1235',
+                'send-btn-bg': '#6A1B9A',
+                'send-btn-shadow': '#4A148C',
+                'send-btn-border': '#7B1FA2',
+                'send-btn-hover': '#7B1FA2',
+                'footer-text': '#9a6aaf',
+                'status-bg': '#3a1a5a',
+                'status-text': '#ce93d8'
+            }
+        };
+
+        const root = document.documentElement;
+        const themeButtons = document.querySelectorAll('.theme-btn');
+        const settingsToggle = document.getElementById('settingsToggle');
+        const settingsPanel = document.getElementById('settingsPanel');
+
+        // Применить тему
+        function applyTheme(themeName) {
+            const theme = themes[themeName];
+            if (!theme) return;
+            
+            Object.entries(theme).forEach(([key, value]) => {
+                root.style.setProperty(`--${key}`, value);
+            });
+            
+            // Сохранить выбор
+            localStorage.setItem('chat_theme', themeName);
+            
+            // Обновить активную кнопку
+            themeButtons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.theme === themeName) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        // Загрузить сохранённую тему
+        const savedTheme = localStorage.getItem('chat_theme') || 'dark';
+        applyTheme(savedTheme);
+
+        // Обработчики кнопок тем
+        themeButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const theme = btn.dataset.theme;
+                applyTheme(theme);
+            });
+        });
+
+        // Переключение панели настроек
+        settingsToggle.addEventListener('click', () => {
+            settingsPanel.classList.toggle('show');
+        });
+
+        // Закрыть панель при клике вне (опционально)
+        document.addEventListener('click', (e) => {
+            if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
+                settingsPanel.classList.remove('show');
+            }
+        });
+
+        // ---------- ЛОГИКА МЕССЕНДЖЕРА ----------
         const messagesContainer = document.getElementById('messagesContainer');
         const messageInput = document.getElementById('messageInput');
         const sendBtn = document.getElementById('sendBtn');
@@ -391,45 +734,23 @@
         const connectionStatus = document.getElementById('connectionStatus');
         const typingIndicator = document.getElementById('typingIndicator');
 
-        // Текущий пользователь
         let currentUser = {
             id: 'user-' + Math.random().toString(36).substr(2, 8),
             name: 'Гость'
         };
 
-        // Все сообщения (храним локально)
         let messages = [];
-        
-        // Счётчик "онлайн" (эмуляция)
         let onlineCount = 1;
-        let botIntervals = [];
-        
-        // Флаги
         let isTyping = false;
         let typingTimeout = null;
 
-        // ---------- ИНИЦИАЛИЗАЦИЯ ИМЕНИ ----------
-        const savedName = localStorage.getItem('chat_username');
-        if (savedName) {
-            nameInput.value = savedName;
-            currentUser.name = savedName;
-        } else {
-            currentUser.name = 'Гость';
-        }
-
-        // ---------- ЭМУЛЯЦИЯ СЕРВЕРА (BOTS + BROADCAST) ----------
-        // Используем BroadcastChannel для связи между вкладками (как websocket)
         const channel = new BroadcastChannel('messenger_channel');
-        
-        // Слушаем сообщения от других вкладок (и от ботов через postMessage)
+
         channel.onmessage = (event) => {
             const data = event.data;
             if (data.type === 'chat_message') {
                 addMessageToDOM(data.message, data.isOwn ? 'own' : 'other');
-                if (!data.isOwn) {
-                    // если сообщение не от нас, добавляем в историю
-                    messages.push(data.message);
-                }
+                if (!data.isOwn) messages.push(data.message);
                 scrollToBottom();
             } else if (data.type === 'user_joined') {
                 addSystemMessage(`👤 ${data.name} присоединился`);
@@ -448,18 +769,15 @@
             }
         };
 
-        // Отправка через канал
         function broadcast(data) {
             channel.postMessage(data);
         }
 
-        // Обновить счётчик онлайн
         function updateOnline(count) {
             onlineCount = count || onlineCount;
             onlineCounter.textContent = `${onlineCount} онлайн`;
         }
 
-        // Добавить системное сообщение
         function addSystemMessage(text) {
             const msgDiv = document.createElement('div');
             msgDiv.className = 'message-wrapper system';
@@ -468,20 +786,17 @@
             scrollToBottom();
         }
 
-        // Экранирование
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
         }
 
-        // Добавление сообщения в DOM
         function addMessageToDOM(msg, type = 'other') {
             const wrapper = document.createElement('div');
             wrapper.className = `message-wrapper ${type}`;
             
             const timeStr = new Date(msg.timestamp).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-            
             let senderDisplay = type === 'own' ? 'Вы' : (msg.senderName || msg.senderId);
             
             wrapper.innerHTML = `
@@ -496,12 +811,10 @@
             messagesContainer.appendChild(wrapper);
         }
 
-        // Прокрутка вниз
         function scrollToBottom() {
             messagesContainer.scrollTop = messagesContainer.scrollHeight;
         }
 
-        // Отправка сообщения
         function sendMessage(text) {
             if (!text.trim()) return;
             
@@ -513,46 +826,32 @@
                 timestamp: Date.now()
             };
             
-            // Отображаем своё
             addMessageToDOM(message, 'own');
             messages.push(message);
             
-            // Широковещательно отправляем (другие вкладки + боты увидят)
             broadcast({
                 type: 'chat_message',
                 message: message,
-                isOwn: false // для других это чужое
+                isOwn: false
             });
             
-            // Также отправляем себе в канал для имитации эха? нет, уже отобразили
-            
             scrollToBottom();
-            
-            // Эмуляция: иногда боты отвечают через случайное время
             scheduleBotReply(message.text);
         }
 
-        // ---------- БОТЫ ДЛЯ ОЖИВЛЕНИЯ ЧАТА ----------
         const botNames = ['Алиса', 'Макс', 'CodeMaster', 'Аноним', 'Techie', 'Лена'];
         const botIds = botNames.map((n, i) => 'bot-' + i);
         
         function scheduleBotReply(triggerText) {
-            if (Math.random() > 0.55) { // 45% шанс ответа
+            if (Math.random() > 0.55) {
                 const delay = 2000 + Math.random() * 5000;
                 setTimeout(() => {
                     const botIndex = Math.floor(Math.random() * botNames.length);
                     const botName = botNames[botIndex];
                     const replies = [
-                        `Согласен с ${currentUser.name}!`,
-                        `Интересная мысль 😄`,
-                        `👍`,
-                        `А что дальше?`,
-                        `Точно!`,
-                        `Я тоже так думаю`,
-                        `Привет, ${currentUser.name}!`,
-                        `🤔`,
-                        `Кто хочет обсудить технологии?`,
-                        `Сегодня отличный день для чата.`
+                        `Согласен с ${currentUser.name}!`, `Интересная мысль 😄`, `👍`,
+                        `А что дальше?`, `Точно!`, `Я тоже так думаю`,
+                        `Привет, ${currentUser.name}!`, `🤔`, `Кто хочет обсудить технологии?`
                     ];
                     const replyText = replies[Math.floor(Math.random() * replies.length)];
                     
@@ -561,153 +860,3 @@
                         text: replyText,
                         senderId: botIds[botIndex],
                         senderName: botName,
-                        timestamp: Date.now()
-                    };
-                    
-                    // Показываем как чужое сообщение
-                    addMessageToDOM(botMsg, 'other');
-                    broadcast({
-                        type: 'chat_message',
-                        message: botMsg,
-                        isOwn: false
-                    });
-                    scrollToBottom();
-                }, delay);
-            }
-        }
-
-        // Имитация онлайна: периодически меняем счётчик
-        function startOnlineSimulation() {
-            setInterval(() => {
-                // случайное изменение онлайна от 1 до 8
-                const newCount = Math.max(1, Math.floor(Math.random() * 8) + 1);
-                updateOnline(newCount);
-                // уведомляем другие вкладки
-                broadcast({ type: 'online_update', onlineCount: newCount });
-            }, 15000);
-        }
-
-        // Присоединение к чату (системное)
-        function announceJoin() {
-            broadcast({
-                type: 'user_joined',
-                name: currentUser.name,
-                userId: currentUser.id,
-                onlineCount: onlineCount
-            });
-            addSystemMessage(`✅ Вы вошли как ${currentUser.name}`);
-        }
-
-        // ---------- ОБРАБОТЧИКИ ----------
-        sendBtn.addEventListener('click', () => {
-            const text = messageInput.value;
-            if (text.trim()) {
-                sendMessage(text);
-                messageInput.value = '';
-                // убираем индикатор печати
-                clearTimeout(typingTimeout);
-                typingIndicator.textContent = '';
-                isTyping = false;
-            }
-        });
-
-        messageInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter' && !e.shiftKey) {
-                e.preventDefault();
-                sendBtn.click();
-            }
-        });
-
-        // Индикатор печати
-        messageInput.addEventListener('input', () => {
-            if (!isTyping) {
-                isTyping = true;
-                broadcast({
-                    type: 'typing',
-                    userId: currentUser.id,
-                    name: currentUser.name
-                });
-            }
-            clearTimeout(typingTimeout);
-            typingTimeout = setTimeout(() => {
-                isTyping = false;
-                // не убираем индикатор сразу, он сам исчезнет через 2 сек
-            }, 1500);
-        });
-
-        setNameBtn.addEventListener('click', () => {
-            const newName = nameInput.value.trim();
-            if (newName && newName !== currentUser.name) {
-                const oldName = currentUser.name;
-                currentUser.name = newName;
-                localStorage.setItem('chat_username', newName);
-                addSystemMessage(`✏️ ${oldName} сменил имя на ${newName}`);
-                broadcast({
-                    type: 'name_changed',
-                    oldName: oldName,
-                    newName: newName,
-                    userId: currentUser.id
-                });
-            }
-        });
-
-        // Обработка закрытия вкладки
-        window.addEventListener('beforeunload', () => {
-            broadcast({
-                type: 'user_left',
-                name: currentUser.name,
-                userId: currentUser.id
-            });
-        });
-
-        // При загрузке
-        window.addEventListener('load', () => {
-            // имитация онлайна
-            startOnlineSimulation();
-            announceJoin();
-            updateOnline(onlineCount);
-            
-            // Запускаем периодических ботов, которые сами что-то пишут
-            setInterval(() => {
-                if (Math.random() > 0.6) {
-                    const botName = botNames[Math.floor(Math.random() * botNames.length)];
-                    const randomMessages = [
-                        'Всем привет!', 'Как дела?', 'Кто-нибудь играет в игры?', 
-                        'Сегодня холодно', '☕', 'Кто на связи?'
-                    ];
-                    const msg = randomMessages[Math.floor(Math.random() * randomMessages.length)];
-                    const botMsg = {
-                        id: 'bot-self-' + Date.now(),
-                        text: msg,
-                        senderId: 'bot-' + botNames.indexOf(botName),
-                        senderName: botName,
-                        timestamp: Date.now()
-                    };
-                    addMessageToDOM(botMsg, 'other');
-                    broadcast({ type: 'chat_message', message: botMsg, isOwn: false });
-                    scrollToBottom();
-                }
-            }, 20000);
-            
-            connectionStatus.textContent = '🟢 онлайн';
-        });
-
-        // Стартовое сообщение
-        setTimeout(() => {
-            addSystemMessage('📡 Чат работает. Можно общаться с другими вкладками.');
-        }, 300);
-        
-        // Если загрузка из localStorage истории (дополнительно)
-        // Синхронизация счётчика при получении
-        channel.addEventListener('message', (e) => {
-            if (e.data.type === 'online_update') {
-                updateOnline(e.data.onlineCount);
-            }
-        });
-
-        // Обработка кнопки "Отправить" disabled если пусто
-        // Всё готово
-    })();
-</script>
-</body>
-</html>
