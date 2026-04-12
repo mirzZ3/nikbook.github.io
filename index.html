@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>🏁 Гонка на выживание</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            user-select: none;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #0b1a2a, #1a2f3f);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Courier New', monospace;
+        }
+
+        .game-container {
+            background: #0f212e;
+            padding: 20px 25px 25px 25px;
+            border-radius: 32px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.7), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            border-bottom: 6px solid #2ecc71;
+        }
+
+        canvas {
+            display: block;
+            margin: 0 auto;
+            width: 100%;
+            max-width: 500px;
+            height: auto;
+            border-radius: 18px;
+            background: #1a2e3c;
+            box-shadow: inset 0 0 30px #00000055, 0 8px 0 #0b151c;
+            border: 2px solid #3a5f6f;
+            cursor: none;
+        }
+
+        .panel {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin: 15px 5px 5px 5px;
+            color: #e1f5fe;
+            text-shadow: 0 2px 3px black;
+            font-weight: bold;
+        }
+
+        .score-board {
+            font-size: 28px;
+            letter-spacing: 2px;
+            background: #07131a;
+            padding: 8px 20px;
+            border-radius: 60px;
+            box-shadow: inset 0 2px 5px #000000, 0 4px 0 #0c1a24;
+            border-bottom: 2px solid #2ecc71;
+            color: #b7f5de;
+        }
+
+        .restart-btn {
+            background: #2c3e50;
+            border: none;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            padding: 8px 22px;
+            border-radius: 60px;
+            box-shadow: 0 5px 0 #141f2c, 0 2px 8px black;
+            cursor: pointer;
+            border-bottom: 2px solid #f1c40f;
+            transition: 0.08s linear;
+            font-family: inherit;
+            letter-spacing: 1px;
+        }
+
+        .restart-btn:hover {
+            background: #3e5f74;
+            transform: translateY(-2px);
+            box-shadow: 0 7px 0 #141f2c, 0 4px 10px black;
+        }
+
+        .restart-btn:active {
+            transform: translateY(5px);
+            box-shadow: 0 2px 0 #141f2c, 0 2px 6px black;
+        }
+
+        .hint {
+            display: flex;
+            gap: 20px;
+            color: #9dc6e0;
+            font-size: 15px;
+            margin: 8px 10px 0 10px;
+        }
+
+        .hint kbd {
+            background: #1e3a4b;
+            padding: 3px 8px;
+            border-radius: 30px;
+            color: #f0f9ff;
+            box-shadow: inset 0 1px 3px black, 0 2px 0 #0c1a24;
+            font-weight: bold;
+        }
+
+        .status {
+            font-size: 18px;
+            color: #feca57;
+        }
+    </style>
+</head>
+<body>
+<div class="game-container">
+    <canvas id="gameCanvas" width="400" height="600"></canvas>
+
+    <div class="panel">
+        <div class="score-board">🏆 <span id="scoreDisplay">0000</span></div>
+        <button class="restart-btn" id="restartButton">🚗 ЗАНОВО</button>
+    </div>
+    <div class="hint">
+        <span><kbd>←</kbd> <kbd>→</kbd> ДВИЖЕНИЕ</span>
+        <span><kbd>R</kbd> РЕСТАРТ</span>
+        <span class="status" id="gameStatus">● В ДВИЖЕНИИ</span>
+    </div>
+</div>
+
+<script>
+    (function(){
+        "use strict";
+
+        // ---------- КАНВАС И КОНТЕКСТ ----------
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        const scoreSpan = document.getElementById('scoreDisplay');
+        const gameStatus = document.getElementById('gameStatus');
+
+        // ---------- РАЗМЕРЫ (ФИКСИРОВАННЫЕ) ----------
+        const LANE_COUNT = 3;
+        const LANE_WIDTH = 120;        // 360 / 3
+        const ROAD_WIDTH = 360;         // ширина дороги
+        const LEFT_MARGIN = 20;         // отступ слева (20 + 360 = 380, остаётся 20 справа)
+        const RIGHT_MARGIN = 20;        // для симметрии
+
+        // Параметры машины игрока
+        const CAR_WIDTH = 46;
+        const CAR_HEIGHT = 78;
+        // стартовая позиция: средняя полоса
+        const PLAYER_START_X = LEFT_MARGIN + LANE_WIDTH + (LANE_WIDTH - CAR_WIDTH) / 2;  // ~ 20+120+(120-46)/2 = 20+120+37 = 177
+        const PLAYER_FIXED_Y = 500;      // от верха канваса
+
+        // ---------- ГЛОБАЛЬНЫЕ ПЕРЕМЕННЫЕ ИГРЫ ----------
+        let player = {
+            x: PLAYER_START_X,
+            y: PLAYER_FIXED_Y,
+            width: CAR_WIDTH,
+            height: CAR_HEIGHT
+        };
+
+        let obstacles = [];              // массив встречных машин
+        let gameActive = true;
+        let score = 0;
+        let frame = 0;                  // счётчик кадров для спавна
+        let speed = 4.2;                // базовая скорость падения врагов
+        const BASE_SPEED = 4.2;
+        const MAX_SPEED = 9.5;
+
+        // Управление
+        let leftPressed = false;
+        let rightPressed = false;
+        const MOVE_SPEED = 6.8;
+
+        // ---------- ВСПОМОГАТЕЛЬНЫЕ ФУНКЦИИ ----------
+        function formatScore(pts) {
+            return Math.min(9999, Math.floor(pts)).toString().padStart(4, '0');
+        }
+
+        function updateUI() {
+            scoreSpan.textContent = formatScore(score);
+        }
+
+        // Проверка столкновения (прямоугольники)
+        function rectCollide(r1, r2) {
+            return !(r2.x >= r1.x + r1.width ||
+                r2.x + r2.width <= r1.x ||
+                r2.y >= r1.y + r1.height ||
+                r2.y + r2.height <= r1.y);
+        }
+
+        // Сброс игры
+        function resetGame() {
+            gameActive = true;
+            score = 0;
+            frame = 0;
+            speed = BASE_SPEED;
+            obstacles = [];
+            player.x = PLAYER_START_X;
+            player.y = PLAYER_FIXED_Y;
+            leftPressed = false;
+            rightPressed = false;
+            gameStatus.textContent = '● В ДВИЖЕНИИ';
+            gameStatus.style.color = '#feca57';
+            updateUI();
+        }
+
+        // Спавн вражеской машины
+        function spawnObstacle() {
+            // случайная полоса 0,1,2
+            const lane = Math.floor(Math.random() * LANE_COUNT);
+            // ширина врага чуть уже полосы
+            const obsWidth = 48 + Math.floor(Math.random() * 8);  // 48..55
+            const obsHeight = 80 + Math.floor(Math.random() * 12); // 80..91
+
+            // координата X по центру полосы
+            const laneCenterX = LEFT_MARGIN + lane * LANE_WIDTH + LANE_WIDTH / 2;
+            let obsX = laneCenterX - obsWidth / 2;
+
+            // чтобы не вылезало за края дороги
+            obsX = Math.max(LEFT_MARGIN + 2, Math.min(obsX, LEFT_MARGIN + ROAD_WIDTH - obsWidth - 2));
+
+            obstacles.push({
+                x: obsX,
+                y: -obsHeight - Math.random() * 60, // старт выше канваса
+                width: obsWidth,
+                height: obsHeight,
+                lane: lane,               // не обязательно, но для отладки
+                speedVariation: 0.9 + Math.random() * 0.6  // небольшой разброс скорости
+            });
+        }
+
+        // Обновление логики (физика, коллизии)
+        function update() {
+            if (!gameActive) return;
+
+            // 1. Движение игрока (стрелки)
+            if (leftPressed) {
+                player.x = Math.max(LEFT_MARGIN + 2, player.x - MOVE_SPEED);
+            }
+            if (rightPressed) {
+                player.x = Math.min(LEFT_MARGIN + ROAD_WIDTH - player.width - 2, player.x + MOVE_SPEED);
+            }
+
+            // 2. Увеличение сложности со временем (скорость растёт)
+            if (frame % 45 === 0) {
+                speed = Math.min(MAX_SPEED, speed + 0.12);
+            }
+
+            // 3. Спавн врагов: каждые ~28-35 кадров, зависит от скорости
+            let spawnRate = Math.max(20, Math.floor(38 - speed * 1.6));
+            if (frame % spawnRate === 0) {
+                spawnObstacle();
+                // иногда двойной спавн для азарта
+                if (speed > 6.8 && Math.random() < 0.35) {
+                    spawnObstacle();
+                }
+            }
+
+            // 4. Движение врагов вниз и удаление вышедших за экран
+            const toRemove = [];
+            for (let obs of obstacles) {
+                // скорость зависит от базовой + индивидуальный множитель
+                obs.y += speed * obs.speedVariation;
+
+                // если враг полностью ушёл за нижнюю границу — удаляем, начисляем очки
+                if (obs.y > canvas.height + 100) {
+                    toRemove.push(obs);
+                    if (gameActive) {
+                        // очки за успешное избегание
+                        score += 15 + Math.floor(speed);
+                    }
+                }
+            }
+
+            // Удаляем вышедшие
+            obstacles = obstacles.filter(obs => !toRemove.includes(obs));
+
+            // 5. Проверка столкновений (только если игра активна)
+            for (let obs of obstacles) {
+                if (rectCollide(player, obs)) {
+                    gameActive = false;
+                    gameStatus.textContent = '💥 АВАРИЯ! ЖМИ R';
+                    gameStatus.style.color = '#ff7675';
+                    break;  // игра окончена
+                }
+            }
+
+            // если игра закончилась — не обновляем счёт дальше
+            if (!gameActive) {
+                // дополнительно финализируем отображение
+            } else {
+                // начисляем небольшой бонус за выживание каждый кадр
+                score += 0.5;
+            }
+
+            // Обновляем UI
+            updateUI();
+            frame++;
+        }
+
+        // ---------- ОТРИСОВКА ----------
+        function drawRoad() {
+            // Асфальт
+            ctx.fillStyle = '#1b3a4b';
+            ctx.fillRect(LEFT_MARGIN-2, 0, ROAD_WIDTH+4, canvas.height);
+            ctx.fillStyle = '#234e63';
+            ctx.fillRect(LEFT_MARGIN, 0, ROAD_WIDTH, canvas.height);
+
+            // Разметка: боковые линии
+            ctx.strokeStyle = '#cbd8e6';
+            ctx.lineWidth = 5;
+            ctx.setLineDash([20, 25]);
+            ctx.beginPath();
+            ctx.moveTo(LEFT_MARGIN - 2, 0);
+            ctx.lineTo(LEFT_MARGIN - 2, canvas.height);
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.moveTo(LEFT_MARGIN + ROAD_WIDTH + 2, 0);
+            ctx.lineTo(LEFT_MARGIN + ROAD_WIDTH + 2, canvas.height);
+            ctx.stroke();
+
+            // Разделительные полосы (прерывистые)
+            ctx.lineWidth = 4;
+            ctx.strokeStyle = '#e1ecf5';
+            ctx.setLineDash([18, 24]);
+            for (let i = 1; i < LANE_COUNT; i++) {
+                const lineX = LEFT_MARGIN + i * LANE_WIDTH;
+                ctx.beginPath();
+                ctx.moveTo(lineX, 0);
+                ctx.lineTo(lineX, canvas.height);
+                ctx.stroke();
+            }
+
+            // Обочина (трава/гравий)
+            ctx.setLineDash([]);
+            ctx.fillStyle = '#1d4233';
+            ctx.fillRect(0, 0, LEFT_MARGIN-4, canvas.height);
+            ctx.fillRect(LEFT_MARGIN+ROAD_WIDTH+4, 0, RIGHT_MARGIN+8, canvas.height);
+            // текстура обочины
+            ctx.fillStyle = '#2a5e45';
+            for (let i=0;i<canvas.height;i+=25) {
+                ctx.fillRect(2, i+ (frame%20), 12, 5);
+                ctx.fillRect(canvas.width-16, i+ (frame%30), 12, 5);
+            }
+
+            // Дорожная разметка центра (оранжевые катафоты)
+            ctx.fillStyle = '#f39c12';
+            ctx.shadowColor = '#f1c40f';
+            ctx.shadowBlur = 8;
+            for (let y = (frame * 2) % 50 - 50; y < canvas.height + 50; y += 50) {
+                ctx.beginPath();
+                ctx.arc(LEFT_MARGIN + ROAD_WIDTH/2, y, 5, 0, Math.PI*2);
+                ctx.fill();
+            }
+            ctx.shadowBlur = 0;
+            ctx.shadowColor = 'transparent';
+        }
+
+        // Рисуем машину (универсальная)
+        function drawCar(x, y, w, h, color, isEnemy = false) {
+            // Кузов
+            ctx.fillStyle = color;
+            ctx.shadowColor = '#00000070';
+            ctx.shadowBlur = 12;
+            ctx.shadowOffsetY = 3;
+            ctx.beginPath();
+            ctx.roundRect(x, y, w, h, 12);
+            ctx.fill();
+
+            // Окна / кабина
+            ctx.shadowBlur = 6;
+            ctx.fillStyle = '#1e2c3a';
+            ctx.beginPath();
+            ctx.roundRect(x + w*0.15, y + h*0.08, w*0.7, h*0.3, 8);
+            ctx.fill();
+            // стёкла
+            ctx.fillStyle = '#aad0f5';
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.roundRect(x + w*0.2, y + h*0.12, w*0.25, h*0.2, 5);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.roundRect(x + w*0.55, y + h*0.12, w*0.25, h*0.2, 5);
+            ctx.fill();
+
+            // Фары
+            ctx.fillStyle = '#f5e56b';
+            ctx.shadowColor = '#f9e547';
+            ctx.shadowBlur = 14;
+            ctx.beginPath();
+            ctx.arc(x + w*0.18, y + h-4, 6, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + w*0.82, y + h-4, 6, 0, Math.PI*2);
+            ctx.fill();
+
+            // Задние фонари (красные)
+            ctx.fillStyle = '#e03a3a';
+            ctx.shadowColor = '#c0392b';
+            ctx.beginPath();
+            ctx.arc(x + w*0.18, y + 6, 5, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(x + w*0.82, y + 6, 5, 0, Math.PI*2);
+            ctx.fill();
+
+            // колёса
+            ctx.shadowBlur = 8;
+            ctx.fillStyle = '#1a1a1a';
+            ctx.shadowColor = '#000';
+            ctx.beginPath();
+            ctx.ellipse(x - 2, y + h*0.25, 8, 12, 0, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(x + w + 2, y + h*0.25, 8, 12, 0, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(x - 2, y + h*0.75, 8, 12, 0, 0, Math.PI*2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.ellipse(x + w + 2, y + h*0.75, 8, 12, 0, 0, Math.PI*2);
+            ctx.fill();
+
+            ctx.shadowBlur = 0;
+            ctx.shadowOffsetY = 0;
+        }
+
+        // Polyfill для roundRect
+        CanvasRenderingContext2D.prototype.roundRect = function(x, y, w, h, r) {
+            if (w < 2 * r) r = w / 2;
+            if (h < 2 * r) r = h / 2;
+            this.moveTo(x + r, y);
+            this.lineTo(x + w - r, y);
+            this.quadraticCurveTo(x + w, y, x + w, y + r);
+            this.lineTo(x + w, y + h - r);
+            this.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+            this.lineTo(x + r, y + h);
+            this.quadraticCurveTo(x, y + h, x, y + h - r);
+            this.lineTo(x, y + r);
+            this.quadraticCurveTo(x, y, x + r, y);
+            return this;
+        };
+
+        function drawScene() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            // Дорога
+            drawRoad();
+
+            // Вражеские машины
+            for (let obs of obstacles) {
+                // цвет зависит от полосы или случайный тёмный
+                const hue = (obs.lane * 40 + frame) % 360;
+                drawCar(obs.x, obs.y, obs.width, obs.height, '#b03a2a', true);
+            }
+
+            // Машина игрока (яркая)
+            drawCar(player.x, player.y, player.width, player.height, '#2ecc71');
+
+            // Эффект "вспышки" если игра неактивна
+            if (!gameActive) {
+                ctx.fillStyle = '#aa222255';
+                ctx.fillRect(0, 0, canvas.width, canvas.height);
+                ctx.font = 'bold 26px "Segoe UI", "Courier New", monospace';
+                ctx.fillStyle = '#f1f1f1';
+                ctx.shadowColor = 'black';
+                ctx.shadowBlur = 16;
+                ctx.textAlign = 'center';
+                ctx.fillText('💢 КРАШ 💢', canvas.width/2, canvas.height/2-20);
+                ctx.font = 'bold 18px monospace';
+                ctx.fillText('нажми R или кнопку', canvas.width/2, canvas.height/2+30);
+                ctx.shadowBlur = 0;
+                ctx.textAlign = 'left';
+            }
+
+            // Отображение скорости
+            ctx.font = 'bold 14px "Courier New", monospace';
+            ctx.fillStyle = '#ecf0f1';
+            ctx.fillText('⚡ ' + speed.toFixed(1), 290, 40);
+        }
+
+        // ---------- ИГРОВОЙ ЦИКЛ ----------
+        function gameLoop() {
+            if (gameActive) {
+                update();
+            }
+            drawScene();
+            requestAnimationFrame(gameLoop);
+        }
+
+        // ---------- УПРАВЛЕНИЕ КЛАВИАТУРОЙ ----------
+        function handleKeyDown(e) {
+            const key = e.key;
+            // Запрет прокрутки стрелками
+            if (key === 'ArrowLeft' || key === 'ArrowRight' || key === 'ArrowUp' || key === 'ArrowDown') {
+                e.preventDefault();
+            }
+
+            if (!gameActive) {
+                if (key.toLowerCase() === 'r') {
+                    resetGame();
+                }
+                return;
+            }
+
+            switch (key) {
+                case 'ArrowLeft': leftPressed = true; break;
+                case 'ArrowRight': rightPressed = true; break;
+                case 'r':
+                case 'R': resetGame(); break;
+                default: break;
+            }
+        }
+
+        function handleKeyUp(e) {
+            const key = e.key;
+            if (key === 'ArrowLeft' || key === 'ArrowRight' || key === 'ArrowUp' || key === 'ArrowDown') {
+                e.preventDefault();
+            }
+            switch (key) {
+                case 'ArrowLeft': leftPressed = false; break;
+                case 'ArrowRight': rightPressed = false; break;
+                default: break;
+            }
+        }
+
+        // Предотвращение скролла при касании на мобилках (стрелки всё равно работают)
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+
+        // Кнопка рестарт
+        document.getElementById('restartButton').addEventListener('click', () => {
+            resetGame();
+        });
+
+        // На случай фокуса вне канваса
+        canvas.addEventListener('contextmenu', (e) => e.preventDefault());
+
+        // Дополнительная поддержка R даже когда игра активна (уже есть)
+        // Запуск
+        resetGame(); // начальное состояние
+        gameLoop();
+
+        // Очистка слушателей (на всякий случай, но не обязательно)
+        window.addEventListener('beforeunload', () => {
+            window.removeEventListener('keydown', handleKeyDown);
+            window.removeEventListener('keyup', handleKeyUp);
+        });
+
+        // Для удобства, если окно теряет фокус — сбрасываем нажатия
+        window.addEventListener('blur', () => {
+            leftPressed = false;
+            rightPressed = false;
+        });
+
+        // Адаптивный тач-блок (мобильное предупреждение - клавиатура нужна, но игра работает)
+        // Можно добавить виртуальные кнопки, но для чистоты оставим стрелки.
+    })();
+</script>
+</body>
+</html>
