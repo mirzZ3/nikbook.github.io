@@ -2,861 +2,672 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>💬 Онлайн Мессенджер</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>SmartWatch X1 | Будущее на вашем запястье</title>
+    <!-- Google Fonts & Font Awesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
         }
 
         body {
-            background: var(--body-bg, linear-gradient(145deg, #1a2639 0%, #0d1b2a 100%));
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+            color: #0a0c10;
+            scroll-behavior: smooth;
+            line-height: 1.5;
+        }
+
+        /* контейнер */
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* header */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #1e2b5c, #2c3e8f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.5px;
+        }
+        .logo i {
+            background: none;
+            color: #2c3e8f;
+            margin-right: 6px;
+        }
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+        .nav-links a {
+            text-decoration: none;
+            font-weight: 600;
+            color: #1e293b;
+            transition: 0.2s;
+            font-size: 1rem;
+        }
+        .nav-links a:hover {
+            color: #2c3e8f;
+        }
+        /* кнопки */
+        .btn {
+            display: inline-block;
+            background: #2c3e8f;
+            color: white;
+            font-weight: 600;
+            padding: 12px 28px;
+            border-radius: 40px;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            box-shadow: 0 8px 18px rgba(44, 62, 143, 0.2);
+        }
+        .btn:hover {
+            background: #1e2b5c;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(44, 62, 143, 0.25);
+        }
+        .btn-outline {
+            background: transparent;
+            border: 2px solid #2c3e8f;
+            color: #2c3e8f;
+            box-shadow: none;
+        }
+        .btn-outline:hover {
+            background: #2c3e8f;
+            color: white;
+        }
+
+        /* hero секция */
+        .hero {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+            padding: 60px 0 40px;
+        }
+        .hero-content {
+            flex: 1;
+            min-width: 280px;
+        }
+        .hero-badge {
+            background: rgba(44, 62, 143, 0.1);
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #2c3e8f;
+            margin-bottom: 20px;
+        }
+        .hero-content h1 {
+            font-size: 3.2rem;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #0f172a, #2c3e8f);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 20px;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            color: #334155;
+            margin-bottom: 28px;
+            max-width: 500px;
+        }
+        .price {
+            font-size: 2rem;
+            font-weight: 800;
+            color: #0f172a;
+            margin-bottom: 20px;
+        }
+        .price span {
+            font-size: 1rem;
+            font-weight: 400;
+            color: #5b6e8c;
+            text-decoration: line-through;
+            margin-left: 12px;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        .timer-block {
+            background: #ffffffdd;
+            backdrop-filter: blur(4px);
+            border-radius: 60px;
+            padding: 12px 20px;
+            margin-top: 32px;
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+            border: 1px solid #e2e8f0;
+        }
+        .timer-text {
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .timer {
+            display: flex;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: #1e293b;
+            color: white;
+            padding: 6px 16px;
+            border-radius: 50px;
+        }
+        .timer div {
+            background: transparent;
+            min-width: 55px;
+            text-align: center;
+        }
+        .hero-image {
+            flex: 1;
+            min-width: 280px;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 16px;
-            transition: background 0.3s ease;
         }
-
-        .messenger {
-            width: 100%;
-            max-width: 700px;
-            height: 85vh;
-            min-height: 600px;
-            background: var(--msg-bg, #15202b);
-            border-radius: 32px;
-            box-shadow: 0 25px 40px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(120, 180, 255, 0.1);
+        .watch-icon {
+            background: radial-gradient(circle at 30% 20%, #eef2ff, #ffffff);
+            width: 320px;
+            height: 320px;
+            border-radius: 50%;
             display: flex;
             flex-direction: column;
-            overflow: hidden;
-            backdrop-filter: blur(2px);
-            transition: background 0.3s ease;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+            border: 1px solid rgba(255,255,255,0.6);
         }
-
-        /* Шапка */
-        .chat-header {
-            background: var(--header-bg, #1e2c3a);
-            padding: 16px 20px;
+        .watch-icon i {
+            font-size: 130px;
+            color: #2c3e8f;
+            margin-bottom: 16px;
+        }
+        .watch-icon .model {
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: 2px;
+            color: #0f172a;
+        }
+        /* секции общие */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 56px;
+            color: #0f172a;
+            position: relative;
+        }
+        .section-title:after {
+            content: '';
+            display: block;
+            width: 70px;
+            height: 4px;
+            background: #2c3e8f;
+            margin: 16px auto 0;
+            border-radius: 4px;
+        }
+        /* карточки преимуществ */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 32px;
+        }
+        .feature-card {
+            background: white;
+            padding: 32px 20px;
+            border-radius: 32px;
+            text-align: center;
+            transition: 0.25s;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+            border: 1px solid #eef2ff;
+        }
+        .feature-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 30px -12px rgba(44,62,143,0.15);
+            border-color: #cbd5e1;
+        }
+        .feature-card i {
+            font-size: 2.8rem;
+            color: #2c3e8f;
+            margin-bottom: 24px;
+        }
+        .feature-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 12px;
+        }
+        .feature-card p {
+            color: #475569;
+        }
+        /* спецификации */
+        .specs {
+            background: #f1f5f9;
+            border-radius: 48px;
+        }
+        .specs-inner {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            justify-content: space-between;
+        }
+        .specs-list {
+            flex: 1;
+            min-width: 240px;
+            background: white;
+            border-radius: 32px;
+            padding: 32px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+        }
+        .specs-list h3 {
+            font-size: 1.7rem;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .specs-list ul {
+            list-style: none;
+        }
+        .specs-list li {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
             display: flex;
             align-items: center;
             gap: 14px;
-            border-bottom: 1px solid var(--border-color, #2e4459);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: background 0.3s ease, border-color 0.3s ease;
+            font-weight: 500;
         }
-
-        .chat-header h2 {
-            color: var(--header-text, #e1f0fa);
-            font-weight: 600;
-            font-size: 1.6rem;
-            letter-spacing: 0.5px;
-            text-shadow: 0 2px 5px #00000040;
+        .specs-list li i {
+            color: #2c3e8f;
+            width: 24px;
         }
-
-        .online-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            margin-left: auto;
-            background: var(--badge-bg, #0f1a24);
-            padding: 6px 16px;
-            border-radius: 40px;
-            border-left: 4px solid #2ecc71;
+        /* отзывы */
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
         }
-
-        .online-dot {
-            width: 12px;
-            height: 12px;
-            background: #2ecc71;
-            border-radius: 50%;
-            box-shadow: 0 0 12px #2ecc71;
-            animation: pulse 1.8s infinite;
+        .testimonial {
+            background: white;
+            padding: 32px;
+            border-radius: 32px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
+            transition: 0.2s;
         }
-
-        .online-count {
-            color: var(--badge-text, #cde5f5);
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        .settings-btn {
-            background: var(--settings-btn-bg, #2c4459);
-            border: none;
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            font-size: 20px;
-            transition: 0.15s;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-            border-bottom: 2px solid #1d3345;
-        }
-
-        .settings-btn:hover {
-            background: var(--settings-btn-hover, #3a5a74);
-            transform: scale(0.95);
-        }
-
-        /* Панель настроек */
-        .settings-panel {
-            background: var(--settings-panel-bg, #1a2c3b);
-            padding: 16px 20px;
-            border-bottom: 1px solid var(--border-color, #2e4459);
-            display: none;
-            animation: slideDown 0.25s ease;
-        }
-
-        .settings-panel.show {
+        .testimonial i.fa-quote-left {
+            color: #cbd5e1;
+            font-size: 1.8rem;
+            margin-bottom: 16px;
             display: block;
         }
-
-        .theme-selector {
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .theme-btn {
-            padding: 10px 20px;
-            border-radius: 40px;
-            border: none;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: 0.15s;
-            box-shadow: 0 3px 0 rgba(0,0,0,0.2);
-            color: white;
-        }
-
-        .theme-btn.dark {
-            background: #1e2c3a;
-            border-bottom: 2px solid #0f1a24;
-        }
-
-        .theme-btn.light {
-            background: #dfe6e9;
-            color: #2d3436;
-            border-bottom: 2px solid #b2bec3;
-        }
-
-        .theme-btn.blue {
-            background: #2980b9;
-            border-bottom: 2px solid #1a5276;
-        }
-
-        .theme-btn.green {
-            background: #27ae60;
-            border-bottom: 2px solid #1e8449;
-        }
-
-        .theme-btn.purple {
-            background: #8e44ad;
-            border-bottom: 2px solid #6c3483;
-        }
-
-        .theme-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 0 rgba(0,0,0,0.2);
-        }
-
-        .theme-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 rgba(0,0,0,0.2);
-        }
-
-        .theme-btn.active {
-            outline: 3px solid #f1c40f;
-            outline-offset: 2px;
-        }
-
-        /* Область сообщений */
-        .messages-container {
-            flex: 1;
-            overflow-y: auto;
-            padding: 18px 14px;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            background: var(--messages-bg, #101a24);
-            background-image: var(--messages-gradient, radial-gradient(circle at 20% 30%, #1a2b38 0%, #0e1922 100%));
-            scroll-behavior: smooth;
-            transition: background 0.3s ease;
-        }
-
-        /* Кастомный скролл */
-        .messages-container::-webkit-scrollbar {
-            width: 6px;
-        }
-        .messages-container::-webkit-scrollbar-track {
-            background: var(--scroll-track, #1b2936);
-            border-radius: 10px;
-        }
-        .messages-container::-webkit-scrollbar-thumb {
-            background: var(--scroll-thumb, #3d637c);
-            border-radius: 10px;
-        }
-
-        /* Сообщения */
-        .message-wrapper {
-            display: flex;
-            width: 100%;
-            animation: fadeIn 0.2s ease;
-        }
-
-        .message-wrapper.own {
-            justify-content: flex-end;
-        }
-
-        .message-bubble {
-            max-width: 80%;
-            padding: 12px 16px;
-            border-radius: 22px;
-            word-break: break-word;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
-            position: relative;
-            transition: transform 0.1s, background 0.3s ease;
-        }
-
-        .own .message-bubble {
-            background: var(--own-msg-bg, linear-gradient(135deg, #1f8e6b, #126b4e));
-            color: var(--own-msg-text, white);
-            border-bottom-right-radius: 6px;
-            border: 1px solid var(--own-msg-border, #2eaf81);
-        }
-
-        .other .message-bubble {
-            background: var(--other-msg-bg, linear-gradient(135deg, #253e50, #1a2d3c));
-            color: var(--other-msg-text, #ecf3fa);
-            border-bottom-left-radius: 6px;
-            border: 1px solid var(--other-msg-border, #3a5569);
-        }
-
-        .system .message-bubble {
-            background: var(--system-msg-bg, #2a3543);
-            color: var(--system-msg-text, #bdd3e6);
+        .testimonial p {
+            font-size: 1rem;
+            color: #1e293b;
+            margin-bottom: 24px;
             font-style: italic;
-            max-width: 90%;
-            margin: 0 auto;
-            text-align: center;
-            border-radius: 30px;
-            padding: 8px 20px;
-            font-size: 0.9rem;
-            border: 1px dashed var(--system-msg-border, #5f7f9c);
-            box-shadow: none;
         }
-
-        .message-header {
+        .user {
             display: flex;
-            align-items: baseline;
-            gap: 10px;
-            margin-bottom: 5px;
-        }
-
-        .sender-name {
-            font-weight: 700;
-            font-size: 0.9rem;
-            opacity: 0.9;
-        }
-
-        .own .sender-name {
-            color: var(--own-sender, #d4f5e5);
-        }
-
-        .other .sender-name {
-            color: var(--other-sender, #9fc8f0);
-        }
-
-        .message-time {
-            font-size: 0.7rem;
-            opacity: 0.7;
-            margin-left: auto;
-        }
-
-        .message-text {
-            line-height: 1.4;
-            font-size: 1rem;
-            white-space: pre-wrap;
-        }
-
-        /* Система ввода */
-        .input-area {
-            background: var(--input-area-bg, #1b2936);
-            padding: 14px 18px;
-            display: flex;
-            gap: 12px;
-            border-top: 1px solid var(--border-color, #2e4b60);
             align-items: center;
-            transition: background 0.3s ease;
+            gap: 12px;
         }
-
-        .input-wrapper {
-            flex: 1;
-            display: flex;
-            background: var(--input-bg, #0f1a24);
-            border-radius: 60px;
-            padding: 4px 4px 4px 20px;
-            border: 1px solid var(--input-border, #3c6079);
-            transition: 0.15s;
-        }
-        .input-wrapper:focus-within {
-            border-color: #2ecc71;
-            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.2);
-            background: var(--input-focus-bg, #13212e);
-        }
-
-        #messageInput {
-            flex: 1;
-            background: transparent;
-            border: none;
-            padding: 14px 8px 14px 0;
-            color: var(--input-text, #ecf9ff);
-            font-size: 1rem;
-            outline: none;
-        }
-
-        #messageInput::placeholder {
-            color: var(--placeholder, #7e9bb0);
-            font-weight: 400;
-        }
-
-        .send-btn {
-            background: var(--send-btn-bg, #1e855c);
-            border: none;
-            border-radius: 60px;
-            width: 52px;
-            height: 52px;
+        .user img {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: #2c3e8f20;
             display: flex;
             align-items: center;
             justify-content: center;
-            cursor: pointer;
-            transition: 0.15s;
+            font-size: 1.5rem;
+            color: #2c3e8f;
+        }
+        .user strong {
+            display: block;
+        }
+        /* CTA секция */
+        .cta {
+            background: linear-gradient(105deg, #0f172a 0%, #1e2b5c 100%);
+            border-radius: 48px;
+            text-align: center;
+            padding: 60px 32px;
             color: white;
-            font-size: 22px;
-            box-shadow: 0 4px 0 var(--send-btn-shadow, #0e4a36);
-            border-bottom: 2px solid var(--send-btn-border, #27ae60);
+            margin-bottom: 40px;
         }
-
-        .send-btn:hover {
-            background: var(--send-btn-hover, #27ae60);
-            transform: scale(0.97);
-            box-shadow: 0 2px 0 var(--send-btn-shadow, #0e4a36);
+        .cta h2 {
+            font-size: 2.2rem;
+            margin-bottom: 16px;
         }
-
-        .send-btn:active {
-            transform: translateY(3px);
-            box-shadow: 0 1px 0 var(--send-btn-shadow, #0e4a36);
+        .cta p {
+            font-size: 1.1rem;
+            margin-bottom: 32px;
+            opacity: 0.9;
         }
-
-        .name-row {
-            display: flex;
-            gap: 8px;
-            align-items: center;
+        .cta .btn {
+            background: white;
+            color: #1e2b5c;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
         }
-
-        #nameInput {
-            background: var(--input-bg, #0f1a24);
-            border: 1px solid var(--input-border, #3c6079);
-            border-radius: 40px;
-            padding: 12px 18px;
-            color: var(--input-text, white);
-            width: 160px;
-            font-size: 0.9rem;
-            outline: none;
+        .cta .btn:hover {
+            background: #f1f5f9;
+            transform: scale(1.02);
         }
-
-        #nameInput:focus {
-            border-color: #3498db;
+        /* футер */
+        footer {
+            border-top: 1px solid #e2e8f0;
+            padding: 40px 0;
+            text-align: center;
+            color: #475569;
         }
-
-        .update-name-btn {
-            background: var(--settings-btn-bg, #2c4459);
+        .social-links a {
+            color: #5b6e8c;
+            font-size: 1.4rem;
+            margin: 0 12px;
+            transition: 0.2s;
+        }
+        .social-links a:hover {
+            color: #2c3e8f;
+        }
+        @media (max-width: 768px) {
+            .hero-content h1 { font-size: 2.4rem; }
+            .navbar { flex-direction: column; }
+            .nav-links { gap: 20px; }
+            .hero { padding: 30px 0; }
+            .timer { font-size: 1.1rem; gap: 6px; }
+            .timer div { min-width: 45px; }
+            .watch-icon { width: 240px; height: 240px; }
+            .watch-icon i { font-size: 90px; }
+        }
+        button {
+            background: none;
             border: none;
-            color: white;
-            padding: 10px 14px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            font-size: 0.8rem;
-            border-bottom: 2px solid #1d3345;
-        }
-
-        .footer-note {
-            font-size: 0.75rem;
-            color: var(--footer-text, #6e93aa);
-            margin-left: 8px;
-        }
-
-        .connection-status {
-            font-size: 0.8rem;
-            padding: 2px 10px;
-            border-radius: 20px;
-            background: var(--status-bg, #1f384b);
-            color: var(--status-text, #b0d9ff);
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes pulse {
-            0% { opacity: 0.7; }
-            50% { opacity: 1; box-shadow: 0 0 16px #2ecc71; }
-            100% { opacity: 0.7; }
         }
     </style>
 </head>
 <body>
-<div class="messenger">
-    <div class="chat-header">
-        <h2>💬 MESSENGER</h2>
-        <div class="online-badge">
-            <span class="online-dot"></span>
-            <span class="online-count" id="onlineCounter">1 онлайн</span>
-        </div>
-        <button class="settings-btn" id="settingsToggle" title="Настройки темы">⚙️</button>
-        <div class="connection-status" id="connectionStatus">🌐 подключено</div>
-    </div>
 
-    <!-- Панель настроек темы -->
-    <div class="settings-panel" id="settingsPanel">
-        <div class="theme-selector">
-            <button class="theme-btn dark active" data-theme="dark">🌙 Тёмная</button>
-            <button class="theme-btn light" data-theme="light">☀️ Светлая</button>
-            <button class="theme-btn blue" data-theme="blue">💙 Синяя</button>
-            <button class="theme-btn green" data-theme="green">🌿 Зелёная</button>
-            <button class="theme-btn purple" data-theme="purple">💜 Фиолетовая</button>
+<header>
+    <div class="container">
+        <div class="navbar">
+            <div class="logo">
+                <i class="fas fa-clock"></i> SmartWatch<span style="font-weight: 300;">X1</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Главная</a></li>
+                <li><a href="#features">Преимущества</a></li>
+                <li><a href="#specs">Характеристики</a></li>
+                <li><a href="#testimonials">Отзывы</a></li>
+                <li><a href="#cta" class="btn-outline" style="padding: 6px 18px;">Купить</a></li>
+            </ul>
         </div>
     </div>
+</header>
 
-    <!-- Область сообщений -->
-    <div class="messages-container" id="messagesContainer">
-        <div class="message-wrapper system">
-            <div class="message-bubble">✨ Добро пожаловать! Выберите тему и общайтесь.</div>
+<main>
+    <!-- Hero секция (home) -->
+    <section id="home">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <div class="hero-badge"><i class="fas fa-bolt"></i> Новая эра технологий</div>
+                    <h1>SmartWatch X1<br>Будущее на запястье</h1>
+                    <p>Инновационный дизайн, ИИ-аналитика здоровья, автономность до 14 дней. Погрузитесь в мир безграничных возможностей.</p>
+                    <div class="price">$199 <span>$349</span></div>
+                    <div class="hero-buttons">
+                        <a href="#cta" class="btn">Заказать сейчас <i class="fas fa-arrow-right"></i></a>
+                        <a href="#features" class="btn-outline btn">Узнать больше</a>
+                    </div>
+                    <!-- Таймер акции -->
+                    <div class="timer-block">
+                        <span class="timer-text"><i class="fas fa-gift"></i> Скидка 40% до конца:</span>
+                        <div class="timer" id="countdownTimer">
+                            <div id="days">00</div><span>:</span>
+                            <div id="hours">00</div><span>:</span>
+                            <div id="minutes">00</div><span>:</span>
+                            <div id="seconds">00</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <div class="watch-icon">
+                        <i class="fas fa-heartbeat"></i>
+                        <i class="fas fa-clock" style="font-size: 100px; margin-top: -20px;"></i>
+                        <div class="model">X1 EDITION</div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
+    </section>
 
-    <!-- Панель ввода -->
-    <div class="input-area">
-        <div class="name-row">
-            <input type="text" id="nameInput" placeholder="Ваше имя" maxlength="20" value="Гость">
-            <button class="update-name-btn" id="setNameBtn">↻ сменить</button>
+    <!-- Преимущества -->
+    <section id="features">
+        <div class="container">
+            <div class="section-title">Ключевые преимущества</div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-battery-full"></i>
+                    <h3>14 дней работы</h3>
+                    <p>Аккумулятор нового поколения и энергоэффективный чип. Забудьте о ежедневной зарядке.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-water"></i>
+                    <h3>Водонепроницаемость 5ATM</h3>
+                    <p>Плавайте, принимайте душ — часы защищены при погружении до 50 метров.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-microchip"></i>
+                    <h3>Чип X1 AI</h3>
+                    <p>Нейросетевой сопроцессор анализирует ваш пульс, сон и активность в реальном времени.</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>50+ спортивных режимов</h3>
+                    <p>От бега до йоги — точная статистика и рекомендации для вашего прогресса.</p>
+                </div>
+            </div>
         </div>
-        <div style="flex:1"></div>
-        <div class="footer-note" id="typingIndicator"></div>
-    </div>
-    <div class="input-area" style="padding-top: 4px;">
-        <div class="input-wrapper">
-            <input type="text" id="messageInput" placeholder="Введите сообщение..." autocomplete="off" maxlength="400">
-            <button class="send-btn" id="sendBtn">➤</button>
+    </section>
+
+    <!-- Характеристики -->
+    <section id="specs" class="specs">
+        <div class="container">
+            <div class="section-title" style="color: #0f172a;">Технические характеристики</div>
+            <div class="specs-inner">
+                <div class="specs-list">
+                    <h3><i class="fas fa-eye"></i> Дисплей</h3>
+                    <ul>
+                        <li><i class="fas fa-desktop"></i> 1.9" AMOLED, Always-On</li>
+                        <li><i class="fas fa-chart-simple"></i> 450 нит яркость</li>
+                        <li><i class="fas fa-shield"></i> Стекло Gorilla Glass 5</li>
+                    </ul>
+                </div>
+                <div class="specs-list">
+                    <h3><i class="fas fa-microchip"></i> Аппаратные</h3>
+                    <ul>
+                        <li><i class="fas fa-memory"></i> 32GB встроенной памяти</li>
+                        <li><i class="fas fa-bluetooth"></i> Bluetooth 5.3, Wi-Fi</li>
+                        <li><i class="fas fa-globe"></i> GPS + ГЛОНАСС</li>
+                    </ul>
+                </div>
+                <div class="specs-list">
+                    <h3><i class="fas fa-heart"></i> Датчики</h3>
+                    <ul>
+                        <li><i class="fas fa-heartbeat"></i> Оптический пульсометр</li>
+                        <li><i class="fas fa-lungs"></i> Измерение SpO₂</li>
+                        <li><i class="fas fa-bed"></i> Мониторинг сна</li>
+                    </ul>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Отзывы клиентов -->
+    <section id="testimonials">
+        <div class="container">
+            <div class="section-title">Что говорят наши клиенты</div>
+            <div class="testimonials-grid">
+                <div class="testimonial">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“Перешел с Apple Watch — SmartWatch X1 приятно удивил. Автономность шикарная, дизайн стильный, а цена в 2 раза ниже. Очень точный трекинг сна.”</p>
+                    <div class="user">
+                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
+                        <div><strong>Алексей К.</strong><span style="font-size: 0.85rem;"> · Бегун</span></div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“Использую для фитнеса и работы — уведомления приходят без задержек, экран яркий даже на солнце. Лучшее соотношение цена/качество.”</p>
+                    <div class="user">
+                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
+                        <div><strong>Екатерина В.</strong><span style="font-size: 0.85rem;"> · Фитнес-тренер</span></div>
+                    </div>
+                </div>
+                <div class="testimonial">
+                    <i class="fas fa-quote-left"></i>
+                    <p>“Очень нравится дизайн и ремешок. Умные часы выглядят дорого. Пульсометр точен, пульс сверял с тонометром — погрешность минимальная.”</p>
+                    <div class="user">
+                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
+                        <div><strong>Дмитрий С.</strong><span style="font-size: 0.85rem;"> · IT-специалист</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Призыв к действию -->
+    <section id="cta">
+        <div class="container">
+            <div class="cta">
+                <h2>Готовы обновить свои часы?</h2>
+                <p>Успейте заказать SmartWatch X1 по акционной цене $199 с бесплатной доставкой по всему миру.</p>
+                <button class="btn" id="orderNowBtn"><i class="fas fa-cart-shopping"></i> Купить сейчас — $199</button>
+                <p style="margin-top: 24px; font-size: 0.85rem;">*Бесплатная доставка, гарантия 24 месяца</p>
+            </div>
+        </div>
+    </section>
+</main>
+
+<footer>
+    <div class="container">
+        <div class="social-links">
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            <a href="#"><i class="fab fa-facebook"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-youtube"></i></a>
+        </div>
+        <p style="margin-top: 24px;">© 2025 SmartWatch X1 — Инновации, которые вдохновляют. Все права защищены.</p>
+        <p style="margin-top: 12px; font-size: 0.8rem;">*Реклама. Стоимость указана для демонстрации.</p>
     </div>
-</div>
+</footer>
 
 <script>
-    (function(){
-        "use strict";
+    // Таймер обратного отсчета (акция 7 дней от текущей даты)
+    function getNextWeekDate() {
+        let now = new Date();
+        let nextWeek = new Date(now);
+        nextWeek.setDate(now.getDate() + 7);
+        nextWeek.setHours(23, 59, 59, 999);
+        return nextWeek;
+    }
 
-        // ---------- УПРАВЛЕНИЕ ТЕМАМИ ----------
-        const themes = {
-            dark: {
-                'body-bg': 'linear-gradient(145deg, #1a2639 0%, #0d1b2a 100%)',
-                'msg-bg': '#15202b',
-                'header-bg': '#1e2c3a',
-                'border-color': '#2e4459',
-                'header-text': '#e1f0fa',
-                'badge-bg': '#0f1a24',
-                'badge-text': '#cde5f5',
-                'settings-btn-bg': '#2c4459',
-                'settings-btn-hover': '#3a5a74',
-                'settings-panel-bg': '#1a2c3b',
-                'messages-bg': '#101a24',
-                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a2b38 0%, #0e1922 100%)',
-                'scroll-track': '#1b2936',
-                'scroll-thumb': '#3d637c',
-                'own-msg-bg': 'linear-gradient(135deg, #1f8e6b, #126b4e)',
-                'own-msg-text': 'white',
-                'own-msg-border': '#2eaf81',
-                'own-sender': '#d4f5e5',
-                'other-msg-bg': 'linear-gradient(135deg, #253e50, #1a2d3c)',
-                'other-msg-text': '#ecf3fa',
-                'other-msg-border': '#3a5569',
-                'other-sender': '#9fc8f0',
-                'system-msg-bg': '#2a3543',
-                'system-msg-text': '#bdd3e6',
-                'system-msg-border': '#5f7f9c',
-                'input-area-bg': '#1b2936',
-                'input-bg': '#0f1a24',
-                'input-border': '#3c6079',
-                'input-text': '#ecf9ff',
-                'placeholder': '#7e9bb0',
-                'input-focus-bg': '#13212e',
-                'send-btn-bg': '#1e855c',
-                'send-btn-shadow': '#0e4a36',
-                'send-btn-border': '#27ae60',
-                'send-btn-hover': '#27ae60',
-                'footer-text': '#6e93aa',
-                'status-bg': '#1f384b',
-                'status-text': '#b0d9ff'
-            },
-            light: {
-                'body-bg': 'linear-gradient(145deg, #f5f7fa 0%, #c3cfe2 100%)',
-                'msg-bg': '#ffffff',
-                'header-bg': '#f8f9fa',
-                'border-color': '#dee2e6',
-                'header-text': '#2c3e50',
-                'badge-bg': '#e9ecef',
-                'badge-text': '#495057',
-                'settings-btn-bg': '#6c757d',
-                'settings-btn-hover': '#5a6268',
-                'settings-panel-bg': '#f1f3f5',
-                'messages-bg': '#f8f9fa',
-                'messages-gradient': 'none',
-                'scroll-track': '#e9ecef',
-                'scroll-thumb': '#adb5bd',
-                'own-msg-bg': '#e3f2fd',
-                'own-msg-text': '#0d47a1',
-                'own-msg-border': '#90caf9',
-                'own-sender': '#1565c0',
-                'other-msg-bg': '#f5f5f5',
-                'other-msg-text': '#212529',
-                'other-msg-border': '#ced4da',
-                'other-sender': '#6c757d',
-                'system-msg-bg': '#e9ecef',
-                'system-msg-text': '#495057',
-                'system-msg-border': '#adb5bd',
-                'input-area-bg': '#ffffff',
-                'input-bg': '#f1f3f5',
-                'input-border': '#ced4da',
-                'input-text': '#212529',
-                'placeholder': '#6c757d',
-                'input-focus-bg': '#ffffff',
-                'send-btn-bg': '#007bff',
-                'send-btn-shadow': '#0056b3',
-                'send-btn-border': '#0062cc',
-                'send-btn-hover': '#0069d9',
-                'footer-text': '#6c757d',
-                'status-bg': '#e9ecef',
-                'status-text': '#495057'
-            },
-            blue: {
-                'body-bg': 'linear-gradient(145deg, #1a2a4a 0%, #0d1b3a 100%)',
-                'msg-bg': '#1a2a4a',
-                'header-bg': '#0f1d3a',
-                'border-color': '#2a4a7a',
-                'header-text': '#bbd9ff',
-                'badge-bg': '#0a1530',
-                'badge-text': '#aac9ff',
-                'settings-btn-bg': '#1e3a6b',
-                'settings-btn-hover': '#2a4f8a',
-                'settings-panel-bg': '#122542',
-                'messages-bg': '#0e1a30',
-                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a2e55 0%, #0a1530 100%)',
-                'scroll-track': '#1a2e55',
-                'scroll-thumb': '#2a4f8a',
-                'own-msg-bg': 'linear-gradient(135deg, #2196F3, #1565C0)',
-                'own-msg-text': 'white',
-                'own-msg-border': '#42a5f5',
-                'own-sender': '#bbdefb',
-                'other-msg-bg': 'linear-gradient(135deg, #1e3a6b, #122a50)',
-                'other-msg-text': '#e3f2fd',
-                'other-msg-border': '#2a5a9a',
-                'other-sender': '#90caf9',
-                'system-msg-bg': '#1a2e55',
-                'system-msg-text': '#b3d4ff',
-                'system-msg-border': '#2a5a9a',
-                'input-area-bg': '#0f1d3a',
-                'input-bg': '#0a1530',
-                'input-border': '#2a4a7a',
-                'input-text': '#e3f2fd',
-                'placeholder': '#6a8fbf',
-                'input-focus-bg': '#122542',
-                'send-btn-bg': '#1565C0',
-                'send-btn-shadow': '#0d47a1',
-                'send-btn-border': '#1976D2',
-                'send-btn-hover': '#1976D2',
-                'footer-text': '#6a8fbf',
-                'status-bg': '#1a2e55',
-                'status-text': '#90caf9'
-            },
-            green: {
-                'body-bg': 'linear-gradient(145deg, #1a3a2a 0%, #0d2a1a 100%)',
-                'msg-bg': '#1a3a2a',
-                'header-bg': '#0f2a1a',
-                'border-color': '#2a6a3a',
-                'header-text': '#c8e6c9',
-                'badge-bg': '#0a1f10',
-                'badge-text': '#a5d6a7',
-                'settings-btn-bg': '#1e5a2e',
-                'settings-btn-hover': '#2a7a3e',
-                'settings-panel-bg': '#122e1e',
-                'messages-bg': '#0e2418',
-                'messages-gradient': 'radial-gradient(circle at 20% 30%, #1a4a2a 0%, #0a1f10 100%)',
-                'scroll-track': '#1a4a2a',
-                'scroll-thumb': '#2a7a3e',
-                'own-msg-bg': 'linear-gradient(135deg, #4CAF50, #2E7D32)',
-                'own-msg-text': 'white',
-                'own-msg-border': '#66bb6a',
-                'own-sender': '#c8e6c9',
-                'other-msg-bg': 'linear-gradient(135deg, #1e5a2e, #124020)',
-                'other-msg-text': '#e8f5e9',
-                'other-msg-border': '#2a7a3e',
-                'other-sender': '#a5d6a7',
-                'system-msg-bg': '#1a4a2a',
-                'system-msg-text': '#c8e6c9',
-                'system-msg-border': '#2a7a3e',
-                'input-area-bg': '#0f2a1a',
-                'input-bg': '#0a1f10',
-                'input-border': '#2a6a3a',
-                'input-text': '#e8f5e9',
-                'placeholder': '#6aaa7a',
-                'input-focus-bg': '#122e1e',
-                'send-btn-bg': '#2E7D32',
-                'send-btn-shadow': '#1B5E20',
-                'send-btn-border': '#388E3C',
-                'send-btn-hover': '#388E3C',
-                'footer-text': '#6aaa7a',
-                'status-bg': '#1a4a2a',
-                'status-text': '#a5d6a7'
-            },
-            purple: {
-                'body-bg': 'linear-gradient(145deg, #2a1a3a 0%, #1a0d2a 100%)',
-                'msg-bg': '#2a1a3a',
-                'header-bg': '#1a0f2a',
-                'border-color': '#5a2a7a',
-                'header-text': '#e1bee7',
-                'badge-bg': '#100a1f',
-                'badge-text': '#ce93d8',
-                'settings-btn-bg': '#4a1e6b',
-                'settings-btn-hover': '#6a2a8a',
-                'settings-panel-bg': '#1e1235',
-                'messages-bg': '#160d24',
-                'messages-gradient': 'radial-gradient(circle at 20% 30%, #3a1a5a 0%, #100a1f 100%)',
-                'scroll-track': '#3a1a5a',
-                'scroll-thumb': '#6a2a8a',
-                'own-msg-bg': 'linear-gradient(135deg, #9C27B0, #6A1B9A)',
-                'own-msg-text': 'white',
-                'own-msg-border': '#ab47bc',
-                'own-sender': '#e1bee7',
-                'other-msg-bg': 'linear-gradient(135deg, #4a1e6b, #2a1240)',
-                'other-msg-text': '#f3e5f5',
-                'other-msg-border': '#6a2a8a',
-                'other-sender': '#ce93d8',
-                'system-msg-bg': '#3a1a5a',
-                'system-msg-text': '#e1bee7',
-                'system-msg-border': '#6a2a8a',
-                'input-area-bg': '#1a0f2a',
-                'input-bg': '#100a1f',
-                'input-border': '#5a2a7a',
-                'input-text': '#f3e5f5',
-                'placeholder': '#9a6aaf',
-                'input-focus-bg': '#1e1235',
-                'send-btn-bg': '#6A1B9A',
-                'send-btn-shadow': '#4A148C',
-                'send-btn-border': '#7B1FA2',
-                'send-btn-hover': '#7B1FA2',
-                'footer-text': '#9a6aaf',
-                'status-bg': '#3a1a5a',
-                'status-text': '#ce93d8'
-            }
-        };
+    let targetDate = getNextWeekDate();
 
-        const root = document.documentElement;
-        const themeButtons = document.querySelectorAll('.theme-btn');
-        const settingsToggle = document.getElementById('settingsToggle');
-        const settingsPanel = document.getElementById('settingsPanel');
+    function updateTimer() {
+        const now = new Date();
+        const diff = targetDate - now;
+        if (diff <= 0) {
+            document.getElementById('days').innerText = '00';
+            document.getElementById('hours').innerText = '00';
+            document.getElementById('minutes').innerText = '00';
+            document.getElementById('seconds').innerText = '00';
+            return;
+        }
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff % (86400000)) / (3600000));
+        const minutes = Math.floor((diff % 3600000) / 60000);
+        const seconds = Math.floor((diff % 60000) / 1000);
+        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
+        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
+        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
+        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
 
-        // Применить тему
-        function applyTheme(themeName) {
-            const theme = themes[themeName];
-            if (!theme) return;
-            
-            Object.entries(theme).forEach(([key, value]) => {
-                root.style.setProperty(`--${key}`, value);
-            });
-            
-            // Сохранить выбор
-            localStorage.setItem('chat_theme', themeName);
-            
-            // Обновить активную кнопку
-            themeButtons.forEach(btn => {
-                btn.classList.remove('active');
-                if (btn.dataset.theme === themeName) {
-                    btn.classList.add('active');
-                }
+    // Кнопка заказа (рекламное действие)
+    const orderBtn = document.getElementById('orderNowBtn');
+    if (orderBtn) {
+        orderBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            alert('🔥 Спасибо за интерес! SmartWatch X1 добавлен в корзину. Менеджер свяжется с вами для подтверждения заказа.');
+        });
+    }
+
+    // также добавим алерт для кнопок "Заказать сейчас" в hero, если есть другие кнопки с классом order-trigger
+    const allOrderButtons = document.querySelectorAll('.hero-buttons .btn, .cta .btn');
+    allOrderButtons.forEach(btn => {
+        if (btn.id !== 'orderNowBtn') {
+            btn.addEventListener('click', function(e) {
+                if (btn.getAttribute('href') === '#cta') return; // ссылка на cta не блокирует
+                e.preventDefault();
+                alert('✨ Перейдите в раздел покупки или нажмите "Купить сейчас" для оформления заказа!');
             });
         }
+    });
 
-        // Загрузить сохранённую тему
-        const savedTheme = localStorage.getItem('chat_theme') || 'dark';
-        applyTheme(savedTheme);
-
-        // Обработчики кнопок тем
-        themeButtons.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const theme = btn.dataset.theme;
-                applyTheme(theme);
-            });
-        });
-
-        // Переключение панели настроек
-        settingsToggle.addEventListener('click', () => {
-            settingsPanel.classList.toggle('show');
-        });
-
-        // Закрыть панель при клике вне (опционально)
-        document.addEventListener('click', (e) => {
-            if (!settingsPanel.contains(e.target) && !settingsToggle.contains(e.target)) {
-                settingsPanel.classList.remove('show');
-            }
-        });
-
-        // ---------- ЛОГИКА МЕССЕНДЖЕРА ----------
-        const messagesContainer = document.getElementById('messagesContainer');
-        const messageInput = document.getElementById('messageInput');
-        const sendBtn = document.getElementById('sendBtn');
-        const nameInput = document.getElementById('nameInput');
-        const setNameBtn = document.getElementById('setNameBtn');
-        const onlineCounter = document.getElementById('onlineCounter');
-        const connectionStatus = document.getElementById('connectionStatus');
-        const typingIndicator = document.getElementById('typingIndicator');
-
-        let currentUser = {
-            id: 'user-' + Math.random().toString(36).substr(2, 8),
-            name: 'Гость'
-        };
-
-        let messages = [];
-        let onlineCount = 1;
-        let isTyping = false;
-        let typingTimeout = null;
-
-        const channel = new BroadcastChannel('messenger_channel');
-
-        channel.onmessage = (event) => {
-            const data = event.data;
-            if (data.type === 'chat_message') {
-                addMessageToDOM(data.message, data.isOwn ? 'own' : 'other');
-                if (!data.isOwn) messages.push(data.message);
-                scrollToBottom();
-            } else if (data.type === 'user_joined') {
-                addSystemMessage(`👤 ${data.name} присоединился`);
-                updateOnline(data.onlineCount);
-            } else if (data.type === 'user_left') {
-                addSystemMessage(`👋 ${data.name} покинул чат`);
-                updateOnline(data.onlineCount);
-            } else if (data.type === 'typing') {
-                if (data.userId !== currentUser.id) {
-                    typingIndicator.textContent = `${data.name} печатает...`;
-                    clearTimeout(window.typingHideTimeout);
-                    window.typingHideTimeout = setTimeout(() => {
-                        typingIndicator.textContent = '';
-                    }, 2000);
+    // плавная прокрутка для навигации (якоря)
+    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"], .logo a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const hash = this.getAttribute('href');
+            if (hash && hash !== '#' && hash.startsWith('#')) {
+                const target = document.querySelector(hash);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
             }
-        };
-
-        function broadcast(data) {
-            channel.postMessage(data);
-        }
-
-        function updateOnline(count) {
-            onlineCount = count || onlineCount;
-            onlineCounter.textContent = `${onlineCount} онлайн`;
-        }
-
-        function addSystemMessage(text) {
-            const msgDiv = document.createElement('div');
-            msgDiv.className = 'message-wrapper system';
-            msgDiv.innerHTML = `<div class="message-bubble">${escapeHtml(text)}</div>`;
-            messagesContainer.appendChild(msgDiv);
-            scrollToBottom();
-        }
-
-        function escapeHtml(text) {
-            const div = document.createElement('div');
-            div.textContent = text;
-            return div.innerHTML;
-        }
-
-        function addMessageToDOM(msg, type = 'other') {
-            const wrapper = document.createElement('div');
-            wrapper.className = `message-wrapper ${type}`;
-            
-            const timeStr = new Date(msg.timestamp).toLocaleTimeString('ru-RU', { hour: '2-digit', minute: '2-digit' });
-            let senderDisplay = type === 'own' ? 'Вы' : (msg.senderName || msg.senderId);
-            
-            wrapper.innerHTML = `
-                <div class="message-bubble">
-                    <div class="message-header">
-                        <span class="sender-name">${escapeHtml(senderDisplay)}</span>
-                        <span class="message-time">${timeStr}</span>
-                    </div>
-                    <div class="message-text">${escapeHtml(msg.text)}</div>
-                </div>
-            `;
-            messagesContainer.appendChild(wrapper);
-        }
-
-        function scrollToBottom() {
-            messagesContainer.scrollTop = messagesContainer.scrollHeight;
-        }
-
-        function sendMessage(text) {
-            if (!text.trim()) return;
-            
-            const message = {
-                id: Date.now() + '-' + Math.random().toString(36),
-                text: text.trim(),
-                senderId: currentUser.id,
-                senderName: currentUser.name,
-                timestamp: Date.now()
-            };
-            
-            addMessageToDOM(message, 'own');
-            messages.push(message);
-            
-            broadcast({
-                type: 'chat_message',
-                message: message,
-                isOwn: false
-            });
-            
-            scrollToBottom();
-            scheduleBotReply(message.text);
-        }
-
-        const botNames = ['Алиса', 'Макс', 'CodeMaster', 'Аноним', 'Techie', 'Лена'];
-        const botIds = botNames.map((n, i) => 'bot-' + i);
-        
-        function scheduleBotReply(triggerText) {
-            if (Math.random() > 0.55) {
-                const delay = 2000 + Math.random() * 5000;
-                setTimeout(() => {
-                    const botIndex = Math.floor(Math.random() * botNames.length);
-                    const botName = botNames[botIndex];
-                    const replies = [
-                        `Согласен с ${currentUser.name}!`, `Интересная мысль 😄`, `👍`,
-                        `А что дальше?`, `Точно!`, `Я тоже так думаю`,
-                        `Привет, ${currentUser.name}!`, `🤔`, `Кто хочет обсудить технологии?`
-                    ];
-                    const replyText = replies[Math.floor(Math.random() * replies.length)];
-                    
-                    const botMsg = {
-                        id: 'bot-' + Date.now(),
-                        text: replyText,
-                        senderId: botIds[botIndex],
-                        senderName: botName,
+        });
+    });
+    // для кнопки "Узнать больше" тоже
+    const moreBtn = document.querySelector('.hero-buttons .btn-outline');
+    if (moreBtn && moreBtn.getAttribute('href') === '#features') {
+        moreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
+        });
+    }
+</script>
+</body>
+</html>
