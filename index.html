@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>SmartWatch X1 | Будущее на вашем запястье</title>
+    <title>Алоэ Вера & Природный баланс | Натуральная продукция для здоровья</title>
     <!-- Google Fonts & Font Awesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
@@ -16,32 +16,32 @@
 
         body {
             font-family: 'Inter', sans-serif;
-            background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
-            color: #0a0c10;
+            background: #fefcf5;
+            color: #2c2b28;
             scroll-behavior: smooth;
             line-height: 1.5;
         }
 
-        /* контейнер */
         .container {
             max-width: 1280px;
             margin: 0 auto;
             padding: 0 24px;
         }
 
-        /* header */
+        /* Header */
         .navbar {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px 0;
             flex-wrap: wrap;
-            gap: 16px;
+            gap: 20px;
+            border-bottom: 1px solid #e9e2d4;
         }
         .logo {
             font-size: 1.8rem;
             font-weight: 800;
-            background: linear-gradient(135deg, #1e2b5c, #2c3e8f);
+            background: linear-gradient(135deg, #2c6e3c, #4c9a2a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -49,7 +49,7 @@
         }
         .logo i {
             background: none;
-            color: #2c3e8f;
+            color: #4c9a2a;
             margin-right: 6px;
         }
         .nav-links {
@@ -60,45 +60,42 @@
         .nav-links a {
             text-decoration: none;
             font-weight: 600;
-            color: #1e293b;
+            color: #3b3a36;
             transition: 0.2s;
-            font-size: 1rem;
         }
         .nav-links a:hover {
-            color: #2c3e8f;
+            color: #4c9a2a;
         }
-        /* кнопки */
         .btn {
             display: inline-block;
-            background: #2c3e8f;
+            background: #4c9a2a;
             color: white;
             font-weight: 600;
             padding: 12px 28px;
             border-radius: 40px;
             text-decoration: none;
-            transition: all 0.25s ease;
+            transition: 0.25s;
             border: none;
             cursor: pointer;
             font-size: 1rem;
-            box-shadow: 0 8px 18px rgba(44, 62, 143, 0.2);
+            box-shadow: 0 8px 18px rgba(76, 154, 42, 0.2);
         }
         .btn:hover {
-            background: #1e2b5c;
+            background: #2c6e3c;
             transform: translateY(-3px);
-            box-shadow: 0 15px 25px rgba(44, 62, 143, 0.25);
         }
         .btn-outline {
             background: transparent;
-            border: 2px solid #2c3e8f;
-            color: #2c3e8f;
+            border: 2px solid #4c9a2a;
+            color: #4c9a2a;
             box-shadow: none;
         }
         .btn-outline:hover {
-            background: #2c3e8f;
+            background: #4c9a2a;
             color: white;
         }
 
-        /* hero секция */
+        /* Hero */
         .hero {
             display: flex;
             flex-wrap: wrap;
@@ -109,310 +106,219 @@
         }
         .hero-content {
             flex: 1;
-            min-width: 280px;
         }
         .hero-badge {
-            background: rgba(44, 62, 143, 0.1);
+            background: rgba(76, 154, 42, 0.12);
             display: inline-block;
             padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #2c3e8f;
+            border-radius: 40px;
+            font-weight: 700;
+            color: #2c6e3c;
             margin-bottom: 20px;
         }
         .hero-content h1 {
             font-size: 3.2rem;
             font-weight: 800;
             line-height: 1.2;
-            letter-spacing: -1px;
-            background: linear-gradient(135deg, #0f172a, #2c3e8f);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
+            color: #2c2b28;
             margin-bottom: 20px;
         }
         .hero-content p {
             font-size: 1.2rem;
-            color: #334155;
+            color: #5c5b57;
             margin-bottom: 28px;
-            max-width: 500px;
-        }
-        .price {
-            font-size: 2rem;
-            font-weight: 800;
-            color: #0f172a;
-            margin-bottom: 20px;
-        }
-        .price span {
-            font-size: 1rem;
-            font-weight: 400;
-            color: #5b6e8c;
-            text-decoration: line-through;
-            margin-left: 12px;
+            max-width: 550px;
         }
         .hero-buttons {
             display: flex;
             gap: 16px;
             flex-wrap: wrap;
-            margin-top: 10px;
-        }
-        .timer-block {
-            background: #ffffffdd;
-            backdrop-filter: blur(4px);
-            border-radius: 60px;
-            padding: 12px 20px;
-            margin-top: 32px;
-            display: inline-flex;
-            align-items: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            box-shadow: 0 4px 14px rgba(0,0,0,0.03);
-            border: 1px solid #e2e8f0;
-        }
-        .timer-text {
-            font-weight: 700;
-            color: #1e293b;
-        }
-        .timer {
-            display: flex;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 1.4rem;
-            background: #1e293b;
-            color: white;
-            padding: 6px 16px;
-            border-radius: 50px;
-        }
-        .timer div {
-            background: transparent;
-            min-width: 55px;
-            text-align: center;
         }
         .hero-image {
             flex: 1;
-            min-width: 280px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            min-width: 260px;
+            background: #eef5e9;
+            border-radius: 64px;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 20px 30px -10px rgba(0,0,0,0.05);
         }
-        .watch-icon {
-            background: radial-gradient(circle at 30% 20%, #eef2ff, #ffffff);
-            width: 320px;
-            height: 320px;
-            border-radius: 50%;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
-            border: 1px solid rgba(255,255,255,0.6);
+        .hero-image i {
+            font-size: 140px;
+            color: #4c9a2a;
         }
-        .watch-icon i {
-            font-size: 130px;
-            color: #2c3e8f;
-            margin-bottom: 16px;
-        }
-        .watch-icon .model {
+        .hero-image .gel-title {
             font-weight: 800;
-            font-size: 2rem;
-            letter-spacing: 2px;
-            color: #0f172a;
+            font-size: 1.8rem;
+            margin-top: 12px;
+            color: #2c6e3c;
         }
-        /* секции общие */
+        /* секции */
         section {
-            padding: 80px 0;
+            padding: 70px 0;
         }
         .section-title {
             text-align: center;
             font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 56px;
-            color: #0f172a;
-            position: relative;
+            color: #2c2b28;
         }
         .section-title:after {
             content: '';
             display: block;
             width: 70px;
             height: 4px;
-            background: #2c3e8f;
+            background: #4c9a2a;
             margin: 16px auto 0;
             border-radius: 4px;
         }
-        /* карточки преимуществ */
-        .features-grid {
+
+        /* карточки продукции */
+        .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 32px;
         }
-        .feature-card {
+        .product-card {
             background: white;
-            padding: 32px 20px;
             border-radius: 32px;
+            padding: 28px 20px;
             text-align: center;
             transition: 0.25s;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
-            border: 1px solid #eef2ff;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.03);
+            border: 1px solid #efe6d8;
         }
-        .feature-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 25px 30px -12px rgba(44,62,143,0.15);
-            border-color: #cbd5e1;
+        .product-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -12px rgba(76,154,42,0.15);
+            border-color: #cde2c1;
         }
-        .feature-card i {
-            font-size: 2.8rem;
-            color: #2c3e8f;
-            margin-bottom: 24px;
+        .product-icon {
+            font-size: 3rem;
+            color: #4c9a2a;
+            margin-bottom: 20px;
         }
-        .feature-card h3 {
+        .product-card h3 {
             font-size: 1.5rem;
             margin-bottom: 12px;
+            font-weight: 700;
         }
-        .feature-card p {
-            color: #475569;
+        .product-badge {
+            background: #f1f7ed;
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 50px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            color: #2c6e3c;
+            margin-bottom: 12px;
         }
-        /* спецификации */
-        .specs {
-            background: #f1f5f9;
-            border-radius: 48px;
+        .product-card p {
+            color: #5e5b55;
+            margin: 12px 0;
+            font-size: 0.95rem;
         }
-        .specs-inner {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 30px;
-            justify-content: space-between;
+        .btn-small {
+            margin-top: 12px;
+            padding: 8px 20px;
+            font-size: 0.85rem;
+            background: #eef5e9;
+            color: #2c6e3c;
+            box-shadow: none;
         }
-        .specs-list {
-            flex: 1;
-            min-width: 240px;
+        .btn-small:hover {
+            background: #4c9a2a;
+            color: white;
+        }
+
+        /* особенное выделение для геля Алоэ Вера */
+        .featured-gel {
+            background: linear-gradient(120deg, #f9fff5, #f2fae9);
+            border: 2px solid #cfe3c0;
+            transform: scale(1.02);
+        }
+        .featured-gel h3 {
+            color: #2c6e3c;
+        }
+
+        /* преимущества */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 32px;
+            margin-top: 20px;
+        }
+        .benefit {
             background: white;
-            border-radius: 32px;
-            padding: 32px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.02);
+            padding: 28px 18px;
+            border-radius: 28px;
+            text-align: center;
+            box-shadow: 0 6px 14px rgba(0,0,0,0.02);
         }
-        .specs-list h3 {
-            font-size: 1.7rem;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+        .benefit i {
+            font-size: 2.2rem;
+            color: #4c9a2a;
+            margin-bottom: 16px;
         }
-        .specs-list ul {
-            list-style: none;
+        .benefit h4 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
         }
-        .specs-list li {
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            font-weight: 500;
-        }
-        .specs-list li i {
-            color: #2c3e8f;
-            width: 24px;
-        }
+
         /* отзывы */
         .testimonials-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 32px;
+            gap: 30px;
         }
         .testimonial {
             background: white;
-            padding: 32px;
             border-radius: 32px;
-            box-shadow: 0 8px 24px rgba(0,0,0,0.05);
-            transition: 0.2s;
+            padding: 28px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.03);
+            border: 1px solid #f0e7db;
         }
         .testimonial i.fa-quote-left {
-            color: #cbd5e1;
+            color: #c5dcb5;
             font-size: 1.8rem;
             margin-bottom: 16px;
-            display: block;
-        }
-        .testimonial p {
-            font-size: 1rem;
-            color: #1e293b;
-            margin-bottom: 24px;
-            font-style: italic;
         }
         .user {
             display: flex;
             align-items: center;
             gap: 12px;
+            margin-top: 20px;
         }
-        .user img {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: #2c3e8f20;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            color: #2c3e8f;
-        }
-        .user strong {
-            display: block;
-        }
-        /* CTA секция */
+
+        /* CTA */
         .cta {
-            background: linear-gradient(105deg, #0f172a 0%, #1e2b5c 100%);
+            background: #2c6e3c;
             border-radius: 48px;
             text-align: center;
-            padding: 60px 32px;
+            padding: 56px 32px;
             color: white;
-            margin-bottom: 40px;
         }
         .cta h2 {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin-bottom: 16px;
         }
-        .cta p {
-            font-size: 1.1rem;
-            margin-bottom: 32px;
-            opacity: 0.9;
-        }
         .cta .btn {
-            background: white;
-            color: #1e2b5c;
-            box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+            background: #ffd966;
+            color: #2c6e3c;
+            box-shadow: none;
+            margin-top: 20px;
         }
-        .cta .btn:hover {
-            background: #f1f5f9;
-            transform: scale(1.02);
-        }
-        /* футер */
+
         footer {
-            border-top: 1px solid #e2e8f0;
+            border-top: 1px solid #e4dbc9;
             padding: 40px 0;
             text-align: center;
-            color: #475569;
-        }
-        .social-links a {
-            color: #5b6e8c;
-            font-size: 1.4rem;
-            margin: 0 12px;
-            transition: 0.2s;
-        }
-        .social-links a:hover {
-            color: #2c3e8f;
+            color: #6b685f;
         }
         @media (max-width: 768px) {
-            .hero-content h1 { font-size: 2.4rem; }
+            .hero-content h1 { font-size: 2.2rem; }
             .navbar { flex-direction: column; }
-            .nav-links { gap: 20px; }
-            .hero { padding: 30px 0; }
-            .timer { font-size: 1.1rem; gap: 6px; }
-            .timer div { min-width: 45px; }
-            .watch-icon { width: 240px; height: 240px; }
-            .watch-icon i { font-size: 90px; }
-        }
-        button {
-            background: none;
-            border: none;
         }
     </style>
 </head>
@@ -422,158 +328,165 @@
     <div class="container">
         <div class="navbar">
             <div class="logo">
-                <i class="fas fa-clock"></i> SmartWatch<span style="font-weight: 300;">X1</span>
+                <i class="fas fa-leaf"></i> Natura<span style="font-weight:300;">Balance</span>
             </div>
             <ul class="nav-links">
-                <li><a href="#home">Главная</a></li>
-                <li><a href="#features">Преимущества</a></li>
-                <li><a href="#specs">Характеристики</a></li>
+                <li><a href="#products">Продукция</a></li>
+                <li><a href="#benefits">Преимущества</a></li>
                 <li><a href="#testimonials">Отзывы</a></li>
-                <li><a href="#cta" class="btn-outline" style="padding: 6px 18px;">Купить</a></li>
+                <li><a href="#contact" class="btn-outline" style="padding:6px 18px;">Контакты</a></li>
             </ul>
         </div>
     </div>
 </header>
 
 <main>
-    <!-- Hero секция (home) -->
+    <!-- Герой с Алоэ Вера гелем -->
     <section id="home">
         <div class="container">
             <div class="hero">
                 <div class="hero-content">
-                    <div class="hero-badge"><i class="fas fa-bolt"></i> Новая эра технологий</div>
-                    <h1>SmartWatch X1<br>Будущее на запястье</h1>
-                    <p>Инновационный дизайн, ИИ-аналитика здоровья, автономность до 14 дней. Погрузитесь в мир безграничных возможностей.</p>
-                    <div class="price">$199 <span>$349</span></div>
+                    <div class="hero-badge"><i class="fas fa-seedling"></i> 100% натуральная формула</div>
+                    <h1>Полезный гель<br>Алоэ Вера</h1>
+                    <p>Насыщенный питьевой гель с высоким содержанием алоэ вера, идеальный баланс для ежедневного очищения и увлажнения организма.</p>
                     <div class="hero-buttons">
-                        <a href="#cta" class="btn">Заказать сейчас <i class="fas fa-arrow-right"></i></a>
-                        <a href="#features" class="btn-outline btn">Узнать больше</a>
-                    </div>
-                    <!-- Таймер акции -->
-                    <div class="timer-block">
-                        <span class="timer-text"><i class="fas fa-gift"></i> Скидка 40% до конца:</span>
-                        <div class="timer" id="countdownTimer">
-                            <div id="days">00</div><span>:</span>
-                            <div id="hours">00</div><span>:</span>
-                            <div id="minutes">00</div><span>:</span>
-                            <div id="seconds">00</div>
-                        </div>
+                        <a href="#products" class="btn">Смотреть всю линейку</a>
+                        <a href="#contact" class="btn-outline btn">Заказать консультацию</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    <div class="watch-icon">
-                        <i class="fas fa-heartbeat"></i>
-                        <i class="fas fa-clock" style="font-size: 100px; margin-top: -20px;"></i>
-                        <div class="model">X1 EDITION</div>
-                    </div>
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <i class="fas fa-leaf" style="font-size: 90px; margin: 0 10px;"></i>
+                    <div class="gel-title">ALOE VERA GEL</div>
+                    <div style="font-weight: 500;">питьевой • детокс • иммунитет</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Преимущества -->
-    <section id="features">
+    <!-- Продукция - Вся линейка + специальный акцент на полезном геле -->
+    <section id="products">
         <div class="container">
-            <div class="section-title">Ключевые преимущества</div>
-            <div class="features-grid">
-                <div class="feature-card">
-                    <i class="fas fa-battery-full"></i>
-                    <h3>14 дней работы</h3>
-                    <p>Аккумулятор нового поколения и энергоэффективный чип. Забудьте о ежедневной зарядке.</p>
+            <div class="section-title">Наша продукция</div>
+            <div class="products-grid">
+                <!-- Усиленный акцент: полезный гель Алоэ Вера (Featured) -->
+                <div class="product-card featured-gel">
+                    <div class="product-icon"><i class="fas fa-leaf"></i><i class="fas fa-tint"></i></div>
+                    <h3>Алоэ Вера Питьевой Гель</h3>
+                    <div class="product-badge"><i class="fas fa-star"></i> ПОЛЕЗНЫЙ ГЕЛЬ</div>
+                    <p><strong>Очищение, увлажнение, здоровье ЖКТ.</strong> 99,7% чистого сока алоэ вера, улучшает пищеварение, поддерживает иммунитет.</p>
+                    <button class="btn btn-small">Подробнее</button>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-water"></i>
-                    <h3>Водонепроницаемость 5ATM</h3>
-                    <p>Плавайте, принимайте душ — часы защищены при погружении до 50 метров.</p>
+
+                <!-- Остальные продукты из файла -->
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-balance-scale"></i></div>
+                    <h3>PRO BALANCE</h3>
+                    <p>Комплекс для поддержания кислотно-щелочного баланса и микрофлоры.</p>
+                    <button class="btn btn-small">Узнать</button>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-microchip"></i>
-                    <h3>Чип X1 AI</h3>
-                    <p>Нейросетевой сопроцессор анализирует ваш пульс, сон и активность в реальном времени.</p>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-jar"></i></div>
+                    <h3>TRADITIONAL HONEY</h3>
+                    <p>Натуральный мед из экологически чистых регионов, источник антиоксидантов.</p>
+                    <button class="btn btn-small">Узнать</button>
                 </div>
-                <div class="feature-card">
-                    <i class="fas fa-chart-line"></i>
-                    <h3>50+ спортивных режимов</h3>
-                    <p>От бега до йоги — точная статистика и рекомендации для вашего прогресса.</p>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-fish"></i></div>
+                    <h3>SUPER OMEGA</h3>
+                    <p>Омега-3,6,9 для здоровья сердца и ясности ума.</p>
+                    <button class="btn btn-small">Узнать</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-seedling"></i></div>
+                    <h3>BEFETAKT</h3>
+                    <p>Биокомплекс с экстрактами для защиты клеток и тонуса.</p>
+                    <button class="btn btn-small">Узнать</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-mushroom"></i></div>
+                    <h3>REISHI PLUS</h3>
+                    <p>Гриб рейши + адаптогены, энергия и гармония.</p>
+                    <button class="btn btn-small">Узнать</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-cubes"></i></div>
+                    <h3>RAPSELLN</h3>
+                    <p>Натуральные растительные капсулы для суставов и связок.</p>
+                    <button class="btn btn-small">Узнать</button>
+                </div>
+                <div class="product-card">
+                    <div class="product-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>PRO 12</h3>
+                    <p>Мультивитаминный комплекс с 12 активными компонентами.</p>
+                    <button class="btn btn-small">Узнать</button>
                 </div>
             </div>
+            <p style="text-align: center; margin-top: 40px; font-size: 0.9rem; background: #f4f0e8; display: inline-block; width: auto; margin-left: auto; margin-right: auto; padding: 8px 24px; border-radius: 100px;"><i class="fas fa-certificate"></i> Все продукты сертифицированы и прошли клинические испытания</p>
         </div>
     </section>
 
-    <!-- Характеристики -->
-    <section id="specs" class="specs">
+    <!-- Преимущества продуктов (здоровье и природа) -->
+    <section id="benefits" style="background: #faf7f0;">
         <div class="container">
-            <div class="section-title" style="color: #0f172a;">Технические характеристики</div>
-            <div class="specs-inner">
-                <div class="specs-list">
-                    <h3><i class="fas fa-eye"></i> Дисплей</h3>
-                    <ul>
-                        <li><i class="fas fa-desktop"></i> 1.9" AMOLED, Always-On</li>
-                        <li><i class="fas fa-chart-simple"></i> 450 нит яркость</li>
-                        <li><i class="fas fa-shield"></i> Стекло Gorilla Glass 5</li>
-                    </ul>
+            <div class="section-title">Почему выбирают нас</div>
+            <div class="benefits-grid">
+                <div class="benefit">
+                    <i class="fas fa-hand-holding-heart"></i>
+                    <h4>Натуральный состав</h4>
+                    <p>Без ГМО, искусственных красителей и консервантов.</p>
                 </div>
-                <div class="specs-list">
-                    <h3><i class="fas fa-microchip"></i> Аппаратные</h3>
-                    <ul>
-                        <li><i class="fas fa-memory"></i> 32GB встроенной памяти</li>
-                        <li><i class="fas fa-bluetooth"></i> Bluetooth 5.3, Wi-Fi</li>
-                        <li><i class="fas fa-globe"></i> GPS + ГЛОНАСС</li>
-                    </ul>
+                <div class="benefit">
+                    <i class="fas fa-flask"></i>
+                    <h4>Клинически доказано</h4>
+                    <p>Эффективность подтверждена исследованиями.</p>
                 </div>
-                <div class="specs-list">
-                    <h3><i class="fas fa-heart"></i> Датчики</h3>
-                    <ul>
-                        <li><i class="fas fa-heartbeat"></i> Оптический пульсометр</li>
-                        <li><i class="fas fa-lungs"></i> Измерение SpO₂</li>
-                        <li><i class="fas fa-bed"></i> Мониторинг сна</li>
-                    </ul>
+                <div class="benefit">
+                    <i class="fas fa-globe-americas"></i>
+                    <h4>Эко-упаковка</h4>
+                    <p>Забота о планете и вашем здоровье.</p>
+                </div>
+                <div class="benefit">
+                    <i class="fas fa-leaf"></i>
+                    <h4>Веганская формула</h4>
+                    <p>Большинство продуктов подходят веганам.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Отзывы клиентов -->
+    <!-- Отзывы -->
     <section id="testimonials">
         <div class="container">
-            <div class="section-title">Что говорят наши клиенты</div>
+            <div class="section-title">Отзывы наших клиентов</div>
             <div class="testimonials-grid">
                 <div class="testimonial">
                     <i class="fas fa-quote-left"></i>
-                    <p>“Перешел с Apple Watch — SmartWatch X1 приятно удивил. Автономность шикарная, дизайн стильный, а цена в 2 раза ниже. Очень точный трекинг сна.”</p>
-                    <div class="user">
-                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
-                        <div><strong>Алексей К.</strong><span style="font-size: 0.85rem;"> · Бегун</span></div>
-                    </div>
+                    <p>“Пью гель Алоэ Вера уже месяц — улучшилось пищеварение, прибавилось энергии. Кожа стала свежее. Очень приятный вкус!”</p>
+                    <div class="user"><i class="fas fa-user-circle fa-2x"></i><div><strong>Анна П.</strong><br>фитнес-нутрициолог</div></div>
                 </div>
                 <div class="testimonial">
                     <i class="fas fa-quote-left"></i>
-                    <p>“Использую для фитнеса и работы — уведомления приходят без задержек, экран яркий даже на солнце. Лучшее соотношение цена/качество.”</p>
-                    <div class="user">
-                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
-                        <div><strong>Екатерина В.</strong><span style="font-size: 0.85rem;"> · Фитнес-тренер</span></div>
-                    </div>
+                    <p>“SUPER OMEGA и PRO BALANCE — моя база. После курса чувствую легкость и улучшение концентрации. Рекомендую!”</p>
+                    <div class="user"><i class="fas fa-user-circle fa-2x"></i><div><strong>Игорь М.</strong><br>предприниматель</div></div>
                 </div>
                 <div class="testimonial">
                     <i class="fas fa-quote-left"></i>
-                    <p>“Очень нравится дизайн и ремешок. Умные часы выглядят дорого. Пульсометр точен, пульс сверял с тонометром — погрешность минимальная.”</p>
-                    <div class="user">
-                        <div class="user-img"><i class="fas fa-user-circle fa-2x"></i></div>
-                        <div><strong>Дмитрий С.</strong><span style="font-size: 0.85rem;"> · IT-специалист</span></div>
-                    </div>
+                    <p>“Traditional Honey невероятно ароматный, настоящий деревенский мед. Reishi Plus помог справиться со стрессом.”</p>
+                    <div class="user"><i class="fas fa-user-circle fa-2x"></i><div><strong>Елена В.</strong><br>мама двоих детей</div></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Призыв к действию -->
-    <section id="cta">
+    <!-- Контактная информация / CTA -->
+    <section id="contact">
         <div class="container">
             <div class="cta">
-                <h2>Готовы обновить свои часы?</h2>
-                <p>Успейте заказать SmartWatch X1 по акционной цене $199 с бесплатной доставкой по всему миру.</p>
-                <button class="btn" id="orderNowBtn"><i class="fas fa-cart-shopping"></i> Купить сейчас — $199</button>
-                <p style="margin-top: 24px; font-size: 0.85rem;">*Бесплатная доставка, гарантия 24 месяца</p>
+                <h2>Хотите получить консультацию по продукции?</h2>
+                <p>Свяжитесь с нами, чтобы подобрать оптимальный набор для вашего здоровья.</p>
+                <button class="btn" id="contactBtn"><i class="fas fa-envelope"></i> Написать нам</button>
+                <p style="margin-top: 24px; font-size: 0.9rem;">📞 +7 (800) 500-75-25  |  ✉️ health@naturabalance.com</p>
             </div>
         </div>
     </section>
@@ -581,93 +494,44 @@
 
 <footer>
     <div class="container">
-        <div class="social-links">
-            <a href="#"><i class="fab fa-instagram"></i></a>
-            <a href="#"><i class="fab fa-facebook"></i></a>
-            <a href="#"><i class="fab fa-twitter"></i></a>
-            <a href="#"><i class="fab fa-youtube"></i></a>
+        <div class="social-links" style="margin-bottom: 16px;">
+            <a href="#" style="color: #4c9a2a; margin: 0 12px; font-size: 1.5rem;"><i class="fab fa-instagram"></i></a>
+            <a href="#" style="color: #4c9a2a; margin: 0 12px; font-size: 1.5rem;"><i class="fab fa-telegram"></i></a>
+            <a href="#" style="color: #4c9a2a; margin: 0 12px; font-size: 1.5rem;"><i class="fab fa-whatsapp"></i></a>
         </div>
-        <p style="margin-top: 24px;">© 2025 SmartWatch X1 — Инновации, которые вдохновляют. Все права защищены.</p>
-        <p style="margin-top: 12px; font-size: 0.8rem;">*Реклама. Стоимость указана для демонстрации.</p>
+        <p>© 2025 NaturaBalance — Вся продукция сертифицирована. Сделано с заботой о природе.</p>
+        <p style="margin-top: 12px; font-size: 0.8rem;">*Реклама. Информация о продукции носит ознакомительный характер.</p>
     </div>
 </footer>
 
 <script>
-    // Таймер обратного отсчета (акция 7 дней от текущей даты)
-    function getNextWeekDate() {
-        let now = new Date();
-        let nextWeek = new Date(now);
-        nextWeek.setDate(now.getDate() + 7);
-        nextWeek.setHours(23, 59, 59, 999);
-        return nextWeek;
-    }
-
-    let targetDate = getNextWeekDate();
-
-    function updateTimer() {
-        const now = new Date();
-        const diff = targetDate - now;
-        if (diff <= 0) {
-            document.getElementById('days').innerText = '00';
-            document.getElementById('hours').innerText = '00';
-            document.getElementById('minutes').innerText = '00';
-            document.getElementById('seconds').innerText = '00';
-            return;
-        }
-        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((diff % (86400000)) / (3600000));
-        const minutes = Math.floor((diff % 3600000) / 60000);
-        const seconds = Math.floor((diff % 60000) / 1000);
-        document.getElementById('days').innerText = days < 10 ? '0' + days : days;
-        document.getElementById('hours').innerText = hours < 10 ? '0' + hours : hours;
-        document.getElementById('minutes').innerText = minutes < 10 ? '0' + minutes : minutes;
-        document.getElementById('seconds').innerText = seconds < 10 ? '0' + seconds : seconds;
-    }
-    updateTimer();
-    setInterval(updateTimer, 1000);
-
-    // Кнопка заказа (рекламное действие)
-    const orderBtn = document.getElementById('orderNowBtn');
-    if (orderBtn) {
-        orderBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            alert('🔥 Спасибо за интерес! SmartWatch X1 добавлен в корзину. Менеджер свяжется с вами для подтверждения заказа.');
+    // Кнопка "Подробнее" / "Узнать" имитирует оформление заявки
+    const detailBtns = document.querySelectorAll('.btn-small');
+    detailBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            alert('🌟 Спасибо за интерес! Наш консультант свяжется с вами в ближайшее время для уточнения деталей по выбранному продукту.');
+        });
+    });
+    // Кнопка контактов
+    const contactBtn = document.getElementById('contactBtn');
+    if (contactBtn) {
+        contactBtn.addEventListener('click', () => {
+            alert('📩 Заявка принята! Мы ответим вам в течение часа. Будьте здоровы!');
         });
     }
-
-    // также добавим алерт для кнопок "Заказать сейчас" в hero, если есть другие кнопки с классом order-trigger
-    const allOrderButtons = document.querySelectorAll('.hero-buttons .btn, .cta .btn');
-    allOrderButtons.forEach(btn => {
-        if (btn.id !== 'orderNowBtn') {
-            btn.addEventListener('click', function(e) {
-                if (btn.getAttribute('href') === '#cta') return; // ссылка на cta не блокирует
-                e.preventDefault();
-                alert('✨ Перейдите в раздел покупки или нажмите "Купить сейчас" для оформления заказа!');
-            });
-        }
-    });
-
-    // плавная прокрутка для навигации (якоря)
-    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"], .logo a').forEach(anchor => {
+    // плавный скролл для навигации
+    document.querySelectorAll('.nav-links a, .hero-buttons a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
-            const hash = this.getAttribute('href');
-            if (hash && hash !== '#' && hash.startsWith('#')) {
-                const target = document.querySelector(hash);
-                if (target) {
+            const targetId = this.getAttribute('href');
+            if (targetId && targetId !== '#' && targetId.startsWith('#')) {
+                const targetEl = document.querySelector(targetId);
+                if (targetEl) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    targetEl.scrollIntoView({ behavior: 'smooth' });
                 }
             }
         });
     });
-    // для кнопки "Узнать больше" тоже
-    const moreBtn = document.querySelector('.hero-buttons .btn-outline');
-    if (moreBtn && moreBtn.getAttribute('href') === '#features') {
-        moreBtn.addEventListener('click', function(e) {
-            e.preventDefault();
-            document.querySelector('#features').scrollIntoView({ behavior: 'smooth' });
-        });
-    }
 </script>
 </body>
 </html>
